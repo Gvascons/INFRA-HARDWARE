@@ -1,0 +1,35 @@
+#int a = ...; #qualquer valor
+#int b = ...;
+#int c = …;
+#int x = …;
+#x = 0;
+#if ( a >= 0 && b <= 64 && c > 24 )
+#x = 1;
+
+.data
+a:.word 0
+b:.word 64
+c:.word 25
+x:.word 5
+
+.text
+lw a1,a
+lw a2,b
+lw a3,c
+lw a4,x 
+
+add a4, zero, zero 
+
+bge a1, zero, end1
+beq x0, x0, end4
+end1:
+addi a5, zero, 64
+ble a2, a5, end2
+beq x0, x0, end4
+end2:  
+addi a5, zero, 24
+bgt a3, a5, end3
+beq x0, x0, end4
+end3:
+addi a4, zero,1
+end4:

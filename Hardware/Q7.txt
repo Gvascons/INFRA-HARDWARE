@@ -1,0 +1,76 @@
+# resultado em a0
+.data
+p1:.string "riscv" #string buscada
+aux1:.string "X"
+p2:.string "xrnrclszumskvbqchuwtgyvieip" #conjunto de letras
+aux2:.string "Y"
+.text
+addi a3,zero,96 #liminte inferio(a)
+ 
+add a0,zero,zero
+addi a7,zero,122 #limite superior(z)
+loop:
+   
+    beq a3,a7,fim
+   
+    addi a3,a3,1
+ 
+    add a4,zero,zero
+    add a5,zero,zero
+    add a6,zero,zero
+ 
+    la a1, p1
+    la a2, aux1
+ 
+    loop1: #conta a quantidade de ocorencias da letra na string buscada
+              #salva a quantidade de ocorencias da letra em a4
+        beq a1,a2,fim1
+        lb s1, (0)a1
+        addi a1,a1,1
+        beq s1,a3,ocorre1
+        j loop1
+ 
+    fim1:
+   
+    beq a4,zero,loop
+   
+    la a1, p2
+    la a2, aux2
+ 
+    loop2: #conta a quantidade de ocorencias da letra no conjunto de letras
+          #salva a quantidade de ocorencias da letra em a5
+ 
+        beq a1,a2,fim2
+        lb s1, (0)a1
+        addi a1,a1,1
+        beq s1,a3,ocorre2
+        j loop2
+ 
+    fim2:
+ 
+    beq a5,zero,loop
+ 
+    #se o programa chegou até aqui siguinifica que a4!=0    e a5!=0
+ 
+    verifica: #conta quantas vezes a4 ocore em a5 e salva em a6
+    bge a5,a4,soma
+   
+    beq a0,zero,atualiza #atualiza se a0=a
+    blt a6,a0,atualiza   #atualiza se a6<a0
+   
+    j loop
+ 
+ocorre1:
+    addi a4, a4, 1
+    j loop1
+ocorre2:
+    addi a5, a5, 1
+    j loop2
+soma:
+    addi a6,a6,1
+    sub a5,a5,a4
+    j verifica
+atualiza:
+    add a0,zero,a6
+    j loop
+fim:

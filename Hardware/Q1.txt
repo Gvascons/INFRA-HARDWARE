@@ -1,0 +1,18 @@
+#int a = 5;
+#int b = 4;
+#int m = 12;
+#m = a;
+#if ( b == m )
+#m = b - a;
+#else 
+#		m = a - b;
+
+addi a1, zero, 5
+addi a2, zero, 4
+addi a3, zero, 12
+add a3, a1, zero
+beq a2, a3, end
+sub a3, a1, a2
+beq x0, x0, end2
+end: sub a3, a2, a1
+end2:

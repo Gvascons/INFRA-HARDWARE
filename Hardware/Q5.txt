@@ -1,0 +1,179 @@
+.data
+        P1:.asciiz "SUPERMAN"
+        X:.asciiz "X"
+        P2:.asciiz "BATMAN"
+        Y:.asciiz "Y"
+
+.text
+        la a1, P1 #carrega string 1
+        la a2, X
+        addi a6,zero,0 #variavel auxiliar para indicar 1 loop   
+        j Loop #1 Loop
+
+        retorno:
+                bne a6, a7, pula #verifica se esta no 1 ou 2 loop
+                add a3, zero, s2 #salva o valor da 1 sring em a3
+                addi s2, zero, 0 #zera s2
+                addi a6, zero, 1 #indica 2 loop
+                la a1, P2 # carrega string 2
+                la a2, Y           
+                j Loop #2 Loop
+
+                pula:
+                        add a4, zero, s2  #salva o valor da 2 sring em a4
+                        add a1, zero, zero
+                        addi t2, zero, 69
+                        addi a1, zero, 69 #empate
+                        beq a3, a4, fim
+
+                        add a1, zero,zero
+                        addi t2, zero, 65
+                        addi a1, zero, 65 #A vence
+                        blt a4, a3, fim
+
+                        add a1, zero, zero
+                        addi t2, zero, 66
+                        addi a1, zero, 66 #B vence
+                        blt a3, a4, fim
+
+                fim:
+                        addi a0, zero, 11 #imprime letra em ascii
+                        ecall
+
+                        addi a0, zero, 10 #fim
+                        ecall
+
+                Loop:
+                        beq a1, a2, retorno
+
+                        lb s1, (0)a1
+
+                        addi a1, a1, 1
+
+                        addi a5, zero, 0
+                        addi a5, zero, 65
+                        beq s1, a5, soma1
+
+                        addi a5, zero, 0
+                        addi a5, zero, 66
+                        beq s1, a5, soma3
+
+                        addi a5, zero, 0
+                        addi a5, zero, 67
+                        beq s1, a5, soma3
+
+                        addi a5, zero, 0
+                        addi a5, zero, 68
+                        beq s1, a5, soma2
+
+                        addi a5, zero, 0
+                        addi a5, zero, 69
+                        beq s1, a5, soma1
+
+                        addi a5, zero, 0
+                        addi a5, zero, 70
+                        beq s1, a5, soma4
+
+                        addi a5, zero, 0
+                        addi a5, zero, 71
+                        beq s1, a5, soma2
+
+                        addi a5, zero, 0
+                        addi a5, zero, 72
+                        beq s1, a5, soma4
+
+                        addi a5, zero, 0
+                        addi a5, zero, 73
+                        beq s1, a5, soma1
+
+                        addi a5, zero, 0
+                        addi a5, zero, 74
+                        beq s1, a5, soma8
+
+                        addi a5, zero, 0
+                        addi a5, zero, 75
+                        beq s1, a5, soma5
+
+                        addi a5, zero, 0
+                        addi a5, zero, 76
+                        beq s1, a5, soma8
+
+                        addi a5, zero, 0
+                        addi a5, zero, 77
+                        beq s1, a5, soma3
+
+                        addi a5, zero, 0
+                        addi a5, zero, 78
+                        beq s1, a5, soma1
+
+                        addi a5, zero, 0
+                        addi a5, zero, 79
+                        beq s1, a5, soma1
+
+                        addi a5, zero, 0
+                        addi a5, zero, 80
+                        beq s1, a5, soma3
+
+                        addi a5, zero, 0
+                        addi a5, zero, 81
+                        beq s1, a5, soma10
+
+                        addi a5, zero, 0
+                        addi a5, zero, 82
+                        beq s1, a5, soma1
+
+                        addi a5, zero, 0
+                        addi a5, zero, 83
+                        beq s1, a5, soma1
+
+                        addi a5, zero, 0
+                        addi a5, zero, 84
+                        beq s1, a5, soma2
+
+                        addi a5, zero, 0
+                        addi a5, zero, 85
+                        beq s1, a5, soma1
+
+                        addi a5, zero, 0
+                        addi a5, zero, 86
+                        beq s1, a5, soma4
+
+                        addi a5, zero, 0
+                        addi a5, zero, 87
+                        beq s1, a5, soma4
+
+                        addi a5, zero, 0
+                        addi a5, zero, 88
+                        beq s1, a5, soma8
+
+                        addi a5, zero, 0
+                        addi a5, zero, 89
+                        beq s1, a5, soma4
+
+                        addi a5, zero, 0
+                        addi a5, zero, 90
+                        beq s1, a5, soma10
+                j Loop
+
+        soma1:
+                        addi s2, s2, 1
+                        j Loop
+        soma2:
+                        addi s2, s2, 2
+                        j Loop
+        soma3:
+                        addi s2, s2, 3
+                        j Loop
+        soma4:
+                        addi s2, s2, 4
+                        j Loop
+        soma5:
+                        addi s2, s2, 5
+                        j Loop
+        soma8:
+                        addi s2, s2, 8
+                        j Loop
+        soma10:
+                        addi s2, s2, 10
+                        j Loop
+Exit:

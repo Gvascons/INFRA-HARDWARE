@@ -1,0 +1,260 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/jgav/Desktop/Projeto3_4_19
+vbancoReg
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1554312408
+!i10b 1
+!s100 6<U[]mGB3mb?_YFUPFb8k2
+IX4:NIB`67i5PGUEWHcH2K0
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+!s105 bancoReg_sv_unit
+S1
+R0
+Z4 w1554307991
+8C:/Users/jgav/Desktop/Projeto3_4_19/bancoReg.sv
+FC:/Users/jgav/Desktop/Projeto3_4_19/bancoReg.sv
+L0 1
+Z5 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z6 !s108 1554312408.000000
+!s107 C:/Users/jgav/Desktop/Projeto3_4_19/bancoReg.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/jgav/Desktop/Projeto3_4_19/bancoReg.sv|
+!i113 1
+Z7 o-work work -sv
+Z8 tCvgOpt 0
+nbanco@reg
+vControle
+R1
+R2
+!i10b 1
+!s100 ;1[iFPhKD0gl^G9A>4G[g1
+IbGNaEg3?c2Be=Tl:kWJ8<0
+R3
+!s105 Controle_sv_unit
+S1
+R0
+w1554312104
+8C:/Users/jgav/Desktop/Projeto3_4_19/Controle.sv
+FC:/Users/jgav/Desktop/Projeto3_4_19/Controle.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/jgav/Desktop/Projeto3_4_19/Controle.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/jgav/Desktop/Projeto3_4_19/Controle.sv|
+!i113 1
+R7
+R8
+n@controle
+Einstr_reg_risc_v
+R4
+Z9 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z10 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z11 8C:/Users/jgav/Desktop/Projeto3_4_19/Instr_Reg_RISC_V.vhd
+Z12 FC:/Users/jgav/Desktop/Projeto3_4_19/Instr_Reg_RISC_V.vhd
+l0
+L49
+V7TD3cNADG8G:ODlTSzz?c1
+!s100 HF;HEc4<o>]o3`Jjc=WPJ2
+Z13 OV;C;10.5b;63
+32
+R2
+!i10b 1
+R6
+Z14 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/jgav/Desktop/Projeto3_4_19/Instr_Reg_RISC_V.vhd|
+Z15 !s107 C:/Users/jgav/Desktop/Projeto3_4_19/Instr_Reg_RISC_V.vhd|
+!i113 1
+Z16 o-work work -2002 -explicit
+Z17 tExplicit 1 CvgOpt 0
+Abehavioral_arch
+R9
+R10
+DEx4 work 16 instr_reg_risc_v 0 22 7TD3cNADG8G:ODlTSzz?c1
+l68
+L65
+Vo8SZoo^`iHF7`CU3CnhD`1
+!s100 e?bWG@:SnkVC476;`5UQ[1
+R13
+32
+R2
+!i10b 1
+R6
+R14
+R15
+!i113 1
+R16
+R17
+vMemoria32
+R1
+R2
+!i10b 1
+!s100 Q2gmKA>Pd1H;3=f[e^lb[3
+IGH0lY6_e9BX[Mc]H:?IWD3
+R3
+!s105 Memoria32_sv_unit
+S1
+R0
+R4
+8C:/Users/jgav/Desktop/Projeto3_4_19/Memoria32.sv
+FC:/Users/jgav/Desktop/Projeto3_4_19/Memoria32.sv
+L0 26
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/jgav/Desktop/Projeto3_4_19/Memoria32.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/jgav/Desktop/Projeto3_4_19/Memoria32.sv|
+!i113 1
+R7
+R8
+n@memoria32
+vramOnChip32
+R2
+!i10b 1
+!s100 UaK7Z2?CFjC?UDMYYFK;A0
+In`400a>:X>QfAB@ICZX8U0
+R3
+R0
+R4
+8C:/Users/jgav/Desktop/Projeto3_4_19/ramOnChip32.v
+FC:/Users/jgav/Desktop/Projeto3_4_19/ramOnChip32.v
+L0 40
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/jgav/Desktop/Projeto3_4_19/ramOnChip32.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/jgav/Desktop/Projeto3_4_19/ramOnChip32.v|
+!i113 1
+o-work work
+R8
+nram@on@chip32
+vregister
+R1
+Z18 !s110 1554312409
+!i10b 1
+!s100 bYE8;I>5ooJ_Za^;]7VNI0
+I?3c1WTUUPH58UMH_5Nkf:3
+R3
+!s105 register_sv_unit
+S1
+R0
+R4
+8C:/Users/jgav/Desktop/Projeto3_4_19/register.sv
+FC:/Users/jgav/Desktop/Projeto3_4_19/register.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/jgav/Desktop/Projeto3_4_19/register.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/jgav/Desktop/Projeto3_4_19/register.sv|
+!i113 1
+R7
+R8
+vsimulacao32
+R1
+R18
+!i10b 1
+!s100 lU7f96O]Rf<NK]O[CIO`72
+IiZzYZdR1SW[@:`h:0`X=A1
+R3
+!s105 simulacao32_sv_bak_unit
+S1
+R0
+w1554312112
+8C:\Users\jgav\Desktop\Projeto3_4_19\simulacao32.sv.bak
+FC:\Users\jgav\Desktop\Projeto3_4_19\simulacao32.sv.bak
+L0 3
+R5
+r1
+!s85 0
+31
+Z19 !s108 1554312409.000000
+!s107 C:\Users\jgav\Desktop\Projeto3_4_19\simulacao32.sv.bak|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:\Users\jgav\Desktop\Projeto3_4_19\simulacao32.sv.bak|
+!i113 1
+R7
+R8
+Eula64
+R4
+Z20 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+R9
+R10
+R0
+Z21 8C:/Users/jgav/Desktop/Projeto3_4_19/ula64.vhd
+Z22 FC:/Users/jgav/Desktop/Projeto3_4_19/ula64.vhd
+l0
+L55
+Vh8o2dPm9b1=EQMJMfPghZ1
+!s100 T1SZ4lW`0`^P2jjFke>h@2
+R13
+32
+R18
+!i10b 1
+R19
+Z23 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/jgav/Desktop/Projeto3_4_19/ula64.vhd|
+Z24 !s107 C:/Users/jgav/Desktop/Projeto3_4_19/ula64.vhd|
+!i113 1
+R16
+R17
+Abehavioral
+R20
+R9
+R10
+DEx4 work 5 ula64 0 22 h8o2dPm9b1=EQMJMfPghZ1
+l81
+L71
+VI^EZmCUhUmlGjFianCgP23
+!s100 ?`9nGLOjDUedegnVSE5YV0
+R13
+32
+R18
+!i10b 1
+R19
+R23
+R24
+!i113 1
+R16
+R17
+vUP
+R1
+R18
+!i10b 1
+!s100 :MGOD30T<K`Z;[oi6mGRC0
+IU2;fhnj2bXVTA;D2<2]Va3
+R3
+!s105 UP_sv_unit
+S1
+R0
+R4
+8C:/Users/jgav/Desktop/Projeto3_4_19/UP.sv
+FC:/Users/jgav/Desktop/Projeto3_4_19/UP.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R19
+!s107 C:/Users/jgav/Desktop/Projeto3_4_19/UP.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/jgav/Desktop/Projeto3_4_19/UP.sv|
+!i113 1
+R7
+R8
+n@u@p

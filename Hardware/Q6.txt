@@ -1,0 +1,33 @@
+.data
+    msg:.asciiz "10101" #BOTAR O NÚMERO AQUI
+    aux:.asciiz "X" #String auxiliar para delimitar o tamanho do numero dado
+ 
+.text
+    la a1, msg
+    la a2, aux
+    lb a3, 0(a1)
+    addi a3, a3, -48  #Subtrair para carregar no registrador o valor sem ser o da tabela ascii
+    addi a4, zero, 1 #a4 começa com 1
+    add a5, zero, zero #a5 começa com 0
+ 
+#Primeiro Loop para percorrer todos os algarismos do numero dado
+    Loop1:
+        beq a1, a2, exit
+ 
+#Realizando o fatorial de cada algarismo
+        Loop2:
+            beq a3, zero, end
+            mul a4, a4, a3
+            addi a3, a3, -1
+            j Loop2
+ 
+#Armazenando o valor do fatorial de cada algarismo fazendo uma recursao utilizando reg x5
+        end:
+            addi a1, a1, 1
+            add a5, a5, a4
+            addi a4, zero, 1
+            lb a3, 0(a1)
+            beq a3, zero, exit
+            addi a3, a3, -48
+            j Loop1
+exit:

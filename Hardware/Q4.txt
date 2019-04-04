@@ -1,0 +1,61 @@
+.data
+        # X msg1 Y Y msg2
+        acabou:.asciiz "X" #CONDIÇÃO PRA ACABAR
+        msg1:.asciiz "arara" #COLOQUE A STRING AQUI !!!!!!!!!!!!!
+        meio1:.asciiz "Y" #ONDE COMEÇA A msg1
+        meio2:.asciiz "Y" #ONDE COMEÇA A msg2
+        msg2:.asciiz " " #O CÓDIGO VAI COPIAR A msg1 AQUI, PRA FICAR COM DUAS STRINGS IGUAIS
+.text    
+        addi, a0, a0, 1 #Começa com 1 e vai pra 0 se não for palíndromo
+        la a1, acabou
+        la a2, msg1
+        la a3, meio1
+        la a4, meio2
+        la a5, msg2
+        addi s7, zero, 32 #ESPAÇO na tabela Ascii
+       
+        #Fazer um "strcpy" msg2 = msg1
+        Loop1:
+            lb s2, (0)a2
+            sb s2, (0)a5
+            addi a2, a2, 1
+            addi a5, a5, 1
+            bne a2, a3, Loop1
+       
+ 
+        #Andar pelas pelavras e sair comparando
+        addi a3, a3, -1
+        addi a4, a4, 1
+        Loop2:              
+            lb s3, (0)a3
+            lb s4, (0)a4
+           
+            #Maiúscula-Minúscula
+            addi s5, s4, 32
+            addi s6, s4, -32
+           
+            beq s3, s7, endSPACE1
+            beq s4, s7, endSPACE2
+            beq s3, s4, endIGUAL
+            beq s3, s5, endIGUAL
+            beq s3, s6, endIGUAL
+            beq a3, a1, Exit #Chegou no X então acabou msg1 (e a msg2 também) Então acaba o programa
+            bne s3, s4, endDIFERENTE
+            j Loop2
+           
+        endSPACE1: #Se tiver um espaço na msg1
+            addi a3, a3, -1
+            j Loop2
+           
+        endSPACE2: #Se tiver um espaço na msg2
+            addi a4, a4, 1
+            j Loop2
+           
+        endIGUAL:
+            addi a3, a3, -1
+            addi a4, a4, 1
+            j Loop2
+           
+        endDIFERENTE: #Quando forem diferentes não é palíndromo então a0 = 0 e acaba o programa
+            addi a0, a0, -1 #a0 = 0  
+Exit:
