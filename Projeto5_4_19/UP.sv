@@ -1,0 +1,128 @@
+module UP
+
+    	(input logic clk,
+	 input logic rst,
+	 input logic MemRead, 
+	 output logic SelMux2,
+	 output logic [1:0]SelMux4,
+     	 output logic PCwrite,
+	 output logic IRwrite,
+	 output logic RegWrite,
+	 output logic dataout1,
+	 output logic dataout2,
+	 output logic loadRegA,
+	 output logic loadRegB,
+	 output logic [63:0] PCExit,
+	 output logic [63:0] AluExit,
+	 output logic [4:0]	i19_15,
+	 output logic [4:0]	i24_20,
+	 output logic [4:0]	i11_7,
+	 output logic [6:0]	i6_0,
+	 output logic [31:0] i31_0,
+	 output logic [31:0] MemExit,
+	 output logic [63:0] MuxA_Exit,
+	 output logic [63:0] MuxB_Exit,
+	 output logic exitState,
+	 output logic [2:0] AluOperation);
+
+parameter Bb = 64'b4; 
+	
+	Controle UnitCtrl
+
+       		(.clk(clk),
+		.rst(rst),
+		.PCwrite(PCwrite),
+		.MemRead(MemRead),
+		.SelMux2(SelMux2),
+	        .SelMux4(SelMux4),
+		.AluOperation(AluOperation),
+		.IRwrite(IRwrite),
+		.RegWrite(RegWrite),
+		.loadRegA(loadRegA),
+		.loadRegB(loadRegB),
+		.exitState(exitState));
+
+	Memoria32 MemoryInstruction
+
+       		(.raddress(PCExit[31:0]),
+		.Clk(clk),
+		.Dataout(MemExit),
+		.Wr(MemRead));
+
+	
+	register PC
+
+	        (.clk(clk),
+		.reset(rst),
+		.regWrite(PCwrite),
+		.DadoIn(AluExit),
+		.DadoOut(PCExit));
+
+
+
+	Instr_Reg_RISC_V RegInstruction
+
+	  	(.Clk(clk),
+		.Reset(rst),
+		.Load_ir(IRwrite),
+		.Entrada(MemExit),
+		.Instr19_15(i19_15),
+		.Instr24_20(i24_20),
+		.Instr11_7(i11_7),
+		.Instr6_0(i6_0),
+		.Instr31_0(i31_0));
+
+	bancoReg Banco_Reg 
+
+		(.clk(clk),
+		.regreader1(i19_15),
+		.regreader2(i24_20),
+		.regwriteadress(i11_7),
+		.datain(), //escrever no registrador: mem->reg (store)
+		.dataout1(dataout1),
+		.dataout2(dataout2),
+		.rst(rst),
+		.RegWrite(RegWrite));
+
+	register A
+
+	        (.clk(clk),
+		.reset(rst),
+		.regWrite(loadRegA),
+		.DadoIn(dataout1),
+		.DadoOut(RegA_Exit));
+
+
+	register B
+
+	        (.clk(clk),
+		.reset(rst),
+		.regWrite(loadRegB), 
+		.DadoIn(dataout2),
+		.DadoOut(RegB_Exit));
+
+	mux_2in MuxA
+	(.SelMux2(SelMux2),
+	.MuxA_a(PCExit),
+	.MuxA_b(RegA_Exit),
+	.f_2in(MuxA_Exit)
+	);
+
+	mux_4in MuxB
+	(.SelMux4(SelMux4),
+	.MuxB_a(RegB_Exit),
+	.MuxB_b(Bb)
+	//.MuxB_c(#),
+	//.MuxB_d(#),
+	);	
+
+
+	ula64 Ula
+       	        (.A(MuxA_Exit),
+		.B(MuxB_Exit),
+		.Seletor(AluOperation),
+		.S(AluExit));
+
+	
+
+endmodule 
