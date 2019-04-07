@@ -1,0 +1,22 @@
+module mux_4in
+	(output logic [64-1:0] f_4in,
+	input logic [64-1:0] MuxB_a,MuxB_b,MuxB_c,MuxB_d,
+	input logic [1:0]sel);
+always_comb
+begin
+    	case(sel) 
+		0: begin
+		f_4in=a;
+		end 
+		1: begin
+		f_4in=b;
+		end 
+		2: begin
+		f_4in=c;
+		end 
+		3: begin
+ 		f_4in=d;
+		end 
+	endcase 
+end
+endmodule
