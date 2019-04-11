@@ -1,0 +1,205 @@
+module UP
+
+    	(input logic clk,
+	 input logic rst,
+	 output logic MemRead, 
+	 output logic SelMux2,
+	 output logic [1:0]SelMux4,
+	 output logic SelMuxMem,
+	 output logic SelMuxPC,
+     	 output logic PCwrite,
+	 output logic IRwrite,
+	 output logic RegWrite,
+	 output logic loadRegA,
+	 output logic loadRegB,
+	 output logic loadRegMemData,
+	 output logic loadRegAluOut,
+	 output logic MemData_Read,	
+	 output logic [63:0] PCExit,
+	 output logic [63:0] AluExit,
+ 	 output logic [63:0] RegA_Exit,
+ 	 output logic [63:0] RegB_Exit,
+ 	 output logic [63:0] AluOut_Exit,
+	 output logic [63:0] ReadData_Exit,
+	 output logic [63:0] MemDataReg_Exit,
+	 output logic [4:0] i19_15,
+	 output logic [4:0] i24_20,
+	 output logic [4:0] i11_7,
+	 output logic [6:0] i6_0,
+	 output logic [31:0] i31_0,
+	 output logic [63:0] SignExit,
+	 output logic [63:0] ShiftExit,
+	 output logic [31:0] MemExit,
+	 output logic [63:0] MuxA_Exit,
+	 output logic [63:0] MuxB_Exit,
+	 output logic [63:0] MuxMem_Exit,
+	 output logic [63:0] MuxPC_Exit,
+	 output logic [63:0]dataout1,
+	 output logic [63:0]dataout2,
+	 output logic exitState,
+	 output logic [5:0] Num,
+         output logic [1:0] Shift,
+	 output logic [2:0] AluOperation,
+	 output logic AluZero);
+
+parameter PCincrement = 64'd4; 
+	
+	Controle UnitCtrl
+
+       		(.clk(clk),
+		.rst(rst),
+		.INSTR(i31_0),
+		.PCwrite(PCwrite),
+		.MemRead(MemRead),
+		.SelMux2(SelMux2),
+	        .SelMux4(SelMux4),
+		.SelMuxMem(SelMuxMem),
+		.AluOperation(AluOperation),
+		.IRwrite(IRwrite),
+		.RegWrite(RegWrite),
+		.loadRegA(loadRegA),
+		.loadRegB(loadRegB),
+		.exitState(exitState),
+		.z(AluZero),
+		.SelMuxPC(SelMuxPC),
+		.loadRegMemData(loadRegMemData),
+		.loadRegAluOut(loadRegAluOut),
+		.MemData_Read(ReadData_Read),
+		.AluExit(AluExit),
+		.PCWriteCond(PCWriteCond));
+
+	Memoria32 MemoryInstruction
+
+       		(.raddress(PCExit[31:0]),
+		.Clk(clk),
+		.Dataout(MemExit),
+		.Wr(1'b0));
+	
+	register PC
+
+	        (.clk(clk),
+		.reset(rst),
+		.regWrite(PCwrite),
+		.DadoIn(MuxPC_Exit),
+		.DadoOut(PCExit));
+
+	Instr_Reg_RISC_V RegInstruction
+
+	  	(.Clk(clk),
+		.Reset(rst),
+		.Load_ir(IRwrite),
+		.Entrada(MemExit),
+		.Instr19_15(i19_15),
+		.Instr24_20(i24_20),
+		.Instr11_7(i11_7),
+		.Instr6_0(i6_0),
+		.Instr31_0(i31_0));
+
+	
+	SignExtend sinalExt
+
+		(.entrada(i31_0),
+		.saida(SignExit));
+
+	Deslocamento ShiftDesloc
+
+		(.In(SignExit),
+ 		 .Num(Num),
+		 .Shift(Shift),
+		 .Out(ShiftExit));			
+
+
+	bancoReg Banco_Reg 
+
+		(.clock(clk),
+		.regreader1(i19_15),
+		.regreader2(i24_20),
+		.regwriteaddress(i11_7),
+		.datain(MuxMem_Exit), 
+		.dataout1(dataout1),
+		.dataout2(dataout2),
+		.reset(rst),
+		.write(RegWrite));
+
+	register A
+
+	        (.clk(clk),
+		.reset(rst),
+		.regWrite(loadRegA),
+		.DadoIn(dataout1),
+		.DadoOut(RegA_Exit));
+
+
+	register B
+
+	        (.clk(clk),
+		.reset(rst),
+		.regWrite(loadRegB), 
+		.DadoIn(dataout2),
+		.DadoOut(RegB_Exit));
+
+	mux_2in MuxA
+
+		(.SelMux2(SelMux2),
+		.MuxA_a(PCExit),
+		.MuxA_b(RegA_Exit),
+		.f_2in(MuxA_Exit));
+
+	mux_4in MuxB
+
+		(.SelMux4(SelMux4),
+		.MuxB_a(RegB_Exit),
+		.MuxB_b(PCincrement),
+		.MuxB_c(SignExit),
+		.MuxB_d(ShiftExit),
+		.f_4in(MuxB_Exit));
+
+	mux_2in MuxPC
+
+		(.SelMux2(SelMuxPC),
+		.MuxA_a(AluExit),
+		.MuxA_b(AluOut_Exit),
+		.f_2in(MuxPC_Exit));	
+
+	ula64 Ula
+
+       	        (.A(MuxA_Exit),
+		.B(MuxB_Exit),
+		.Seletor(AluOperation),
+		.z(AluZero),
+		.S(AluExit));
+	
+	register AluOut
+	
+	 	(.clk(clk),
+		.reset(rst),
+		.regWrite(loadRegAluOut), 
+		.DadoIn(AluExit),
+		.DadoOut(AluOut_Exit));
+
+	Memoria64 MemoryData
+
+		(.raddress(AluExit),
+		.waddress(AluExit),
+		.Clk(clk),
+		.Datain(RegB_Exit),
+		.Dataout(ReadData_Exit),
+		.Wr(MemData_Read));
+
+	register MemDataReg
+	
+	 	(.clk(clk),
+		.reset(rst),
+		.regWrite(loadRegMemData), 
+		.DadoIn(ReadData_Exit),
+		.DadoOut(MemDataReg_Exit));
+
+	mux_2in MuxMem
+
+		(.SelMux2(SelMuxMem),
+		.MuxA_a(AluExit),
+		.MuxA_b(MemDataReg_Exit),
+		.f_2in(MuxMem_Exit));
+	
+
+endmodule 

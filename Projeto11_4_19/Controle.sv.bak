@@ -1,0 +1,262 @@
+module Controle(
+	 input logic clk,
+	 input logic rst,
+	 input logic [31:0] INSTR,
+	 output logic PCwrite,
+	 output logic IRwrite,
+	 output logic [3-1:0] AluOperation,
+	 output logic MemRead,
+	 output logic exitState,
+	 output logic loadRegA,
+	 output logic loadRegB,
+	 output logic loadRegAluOut,
+	 output logic SelMux2,
+	 output logic SelMuxMem,
+	 output logic RegWrite,
+	 output logic PCWriteCond,
+	 output logic z,
+	 output logic loadRegMemData,
+	 output logic MemData_Read,
+	 output logic SelMuxPC,
+	 output logic AluZero,
+	 output logic [1:0]SelMux4);
+
+parameter SUM = 3'b001;
+parameter SUB = 3'b010;
+parameter LOAD = 3'b000;
+
+enum logic [4:0] {RESET , FETCH , DECODE, ESTADO, ADD_COMP, ADDI_INIT, ADDI_COMP, SUBT_COMP,LOAD_INIT, BEQ_INIT, BEQ_COMP, LOAD_DATA, LOAD_DATA_COMP, OP_COMP, STORE_DATA, STORE_DATA_COMP} state, nextState;
+
+always_ff @(posedge clk, posedge rst) 
+begin
+	if(rst)
+	  state <= RESET;
+	else
+	  state <= nextState;
+end
+
+always_comb 
+begin
+	case(state)
+
+	  RESET: begin
+	     SelMux2 = 0;
+	     SelMux4 = 0;
+	     SelMuxMem = 0;
+	     PCwrite = 0;
+ 	     MemRead = 0;
+	     IRwrite = 0;
+	     exitState = 0;
+	     loadRegA = 0;
+	     loadRegB = 0;
+	     AluOperation = 3'bxxx;
+	     AluZero = 0;
+             nextState = FETCH;
+	  end
+
+	  FETCH: begin
+	     SelMuxPC = 0;
+	     SelMux2 = 0;
+	     SelMux4 = 1;
+	     SelMuxMem = 0;
+ 	     PCwrite = 1;
+	     MemRead = 0;
+	     IRwrite = 0;
+	     loadRegAluOut = 1;
+	     exitState = 1;
+	     AluOperation = SUM;
+             nextState = DECODE;
+	  end
+
+	   DECODE: begin
+	     SelMuxPC = 0;
+	     SelMux2 = 0;
+	     SelMux4 = 1;
+	     SelMuxMem = 0;
+	     PCwrite = 0;
+ 	     MemRead = 1;
+	     IRwrite = 1;
+             loadRegAluOut = 0;
+	     exitState = 0;
+	     AluOperation = SUM;
+             nextState = ESTADO ; //Como saber qual vai ser o proximo estagio, ja que depende do tipo de instrucao
+	   end
+	
+	   ESTADO: begin
+		case(INSTR[6:0]) 
+		     7'b0110011: begin  // Tipo R
+		     PCwrite = 0;
+ 		     MemRead = 0;
+		     IRwrite = 0;
+		     SelMux2 = 1;
+		     SelMux4 = 0;
+		     SelMuxMem = 0;
+		     loadRegA = 1;
+		     loadRegB = 1;
+		     if (INSTR[31:25] == 7'b0000000)
+		     	begin
+			exitState = 0;
+		     	AluOperation = SUM;
+		     	loadRegAluOut = 1;
+                     	end
+		     if (INSTR[31:25] == 7'b0100000)
+			begin
+			 exitState =0;
+        	     	AluOperation = SUB;
+		    	loadRegAluOut = 1;
+			PCWriteCond = 0;
+		    	end	
+		     SelMuxMem = 0;
+		     RegWrite = 1;
+		     nextState = FETCH;
+		     end
+			
+		
+		     7'b0010011: begin	// Tipo I (addi)
+		     case (state)
+		     ADDI_INIT:begin
+		     PCwrite = 0;
+ 		     MemRead = 0;
+		     IRwrite = 0;
+		     SelMux2 = 1;
+		     SelMux4 = 2;
+		     loadRegA = 1;
+		     loadRegB = 0;
+		     loadRegAluOut = 1;
+		     exitState = 0;
+		     AluOperation = SUM ;
+        	     nextState = ADDI_COMP;
+		     end
+
+		     ADDI_COMP: begin
+		     SelMuxMem = 0;
+		     RegWrite = 1;
+		     $stop;
+		     end
+		     endcase
+		     nextState = FETCH;
+		     end
+
+		     7'b0000011:begin  // Tipo I (load)
+			case(state)
+		     LOAD_INIT:begin
+ 		     MemRead = 0;
+		     IRwrite = 0;
+		     SelMux4 = 2;
+		     loadRegA = 1;
+		     loadRegB = 0;
+		     exitState = 0;
+        	     nextState = LOAD_DATA;
+		     end
+		    
+		     LOAD_DATA: begin
+		     AluOperation = SUM;
+		     MemData_Read = 1;
+	             loadRegMemData = 1;
+		     nextState = LOAD_DATA_COMP;
+		     end
+		
+		     LOAD_DATA_COMP: begin
+		     loadRegMemData = 1;
+		     SelMuxMem = 1;
+		     RegWrite = 1;
+		     $stop;
+		     end
+		  	endcase
+		     nextState = FETCH;
+		     end
+		
+		     7'b0100011: begin	// Tipo S (store)
+		     PCwrite = 0;
+ 		     MemRead = 0;
+		     IRwrite = 0;
+		     SelMux2 = 1;
+		     SelMux4 = 2;
+		     loadRegA = 1;
+		     loadRegB = 0;
+		     loadRegAluOut = 1;
+		     exitState = 0;
+		     AluOperation = SUM;
+        	     nextState = STORE_DATA;
+		     end
+	
+		     STORE_DATA: begin
+		     MemData_Read = 1;
+	             loadRegMemData = 1;
+		     nextState = FETCH;
+		     end
+		     
+		     7'b1100011: begin	   // Tipo SB (BEQ)
+		     case(state)
+		     BEQ_INIT:begin
+		     exitState = 0;
+		     SelMux2 = 1;
+		     SelMux4 = 0;
+		     loadRegA = 1;
+		     loadRegB = 1;
+		     MemRead = 0;
+		     IRwrite = 0;
+		     loadRegAluOut = 1;
+		     end
+		     BEQ_COMP:begin
+		     AluOperation = SUB;
+		     PCWriteCond = 1;
+		     SelMuxPC = 0;
+		     if (AluZero)
+			begin
+			PCwrite = 1;
+			$stop;
+			end
+		     z = 0;
+		     PCwrite = 0;
+		     PCWriteCond = 1'bx;
+		     end
+		     endcase
+		     nextState = FETCH;
+		     end
+
+		     7'b1100111: begin	 // Tipo SB (BNE)
+		     exitState = 0;
+		     SelMux2 = 1;
+		     SelMux4 = 0;
+		     MemRead = 0;
+		     IRwrite = 0;
+		     AluOperation = SUB;
+		     SelMuxPC = 1;
+		     PCWriteCond = 0;
+		     if (z == 1)
+		      begin
+		      PCwrite = 0;
+		      end
+		     nextState = FETCH;
+		     end
+
+		     
+		/*    7'b0110111: begin	// Tipo U (LUI)
+		     PCwrite = 0;
+ 		     MemRead = 0;
+		     IRwrite = 1;
+		     SelMux2 = 1;
+		     SelMux4 = 2;
+		     loadRegA = 1;
+		     loadRegB = 0;
+		     loadRegAluOut = 1;
+		     exitState = 10;
+		     AluOperation = SUB;
+        	     nextState = BEQ_DATA;
+		     end
+	
+		     BEQ_DATA: begin
+		     MemData_Read = 1;
+		     RegWrite = 0;
+	             loadRegMemData = 1;
+		     nextState = BEQ_DATA_COMP;
+		     end */
+
+		endcase
+	   end
+	endcase 
+
+	exitState = state;
+end
+endmodule 
