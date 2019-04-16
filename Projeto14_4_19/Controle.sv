@@ -28,15 +28,21 @@ module Controle(
     parameter RESET = 1; 
     parameter FETCH = 2; 
     parameter DECODE = 3; 
-    parameter sumOP = 4;  
-    parameter subOP = 5; 
-    parameter LAS = 6;
-    parameter beqOP = 7; 
-    parameter bneOP = 8; 
-    parameter sumsubWrite = 9;
-    parameter memDRead = 10;
-    parameter memDWrite = 11;
-    parameter loadWrite = 12;
+    parameter sumOP1 = 4;
+    parameter sumOP2 = 5;  
+    parameter subOP1 = 6;
+    parameter subOP2 = 7; 
+    parameter beqOP1 = 8;
+    parameter beqOP2 = 9; 
+    parameter bneOP1 = 10;
+    parameter bneOP2 = 11; 
+    parameter sumsubWrite1 = 12;
+    parameter sumsubWrite2 = 13;
+    parameter memDRead1 = 14;
+    parameter memDRead2 = 15;
+    parameter memDWrite1 = 16;
+    parameter memDWrite2 = 17;
+    parameter loadWrite = 18;
  
     reg [5:0]state;
  
@@ -75,7 +81,7 @@ module Controle(
                 DECODE: begin
                         SelMuxPC = 0;
                         SelMux2 = 0;
-                        SelMux4 = 1;
+                        SelMux4 = 3;
                     	loadRegA = 1;
                         loadRegB = 1;
                         SelMuxMem = 0;
@@ -89,82 +95,51 @@ module Controle(
 			case(INSTR[6:0])
 				7'b0110011: begin   // Tipo R
                                 	if (INSTR[31:25] == 7'b0000000) begin
-						SelMux2 = 0;
-						SelMux4 = 1;
-                                		exitState = 0;
-                                		AluOperation = SUM;
-                                		loadRegAluOut = 1;
-						state = sumOP;
+						state = sumOP1;
                                 	end
                                 	if (INSTR[31:25] == 7'b0100000) begin
-                                		SelMux2 = 0;
-						SelMux4 = 1;
-						exitState = 0;
-						AluOperation = SUB;
-						loadRegAluOut = 1;
-						state = subOP;
+                                		state = subOP1;
                                 	end
 				end
 
 				7'b0000011: begin   // Tipo S (load)
-                                	SelMux2 = 1;
-					SelMux4 = 0;
-                                        AluOperation = LOAD;
-                                        exitState = 0;
-					loadRegAluOut = 1;
-                                        state = LAS; // Direciona a LOAD, ADDI ou STORE
+					state = memDRead1;
 				end               
 
 				7'b0010011: begin   // Tipo I (addi)
-					SelMux2 = 1;
-					SelMux4 = 0;
-                                        AluOperation = LOAD;
-                                        exitState = 0;
-					loadRegAluOut = 1;
-                                        state = LAS;	
+					state = sumsubWrite1;
                             	end
 
 				7'b0100011: begin   // Tipo I (store)
-					SelMux2 = 1;
-					SelMux4 = 0;
-                                        AluOperation = LOAD;
-                                        exitState = 0;
-					loadRegAluOut = 1;
-                                        state = LAS;	
+					state = memDWrite1; //calcula o OFFSET para o LOAD, STORE, E ADDI
                             	end
 
 				7'b1100011: begin   // Tipo SB (beq)
-					SelMux2 = 0;
-					SelMux4 = 3;
-					PCwrite = 0;
-                                        AluOperation = SUM;
-                                        exitState = 0;
-					loadRegAluOut = 1;
-					loadRegA = 1;
-					loadRegB = 1;
-					SelMuxPC = 1;
-                                        state = beqOP;
+                                        state = beqOP1;
 
                             	end
 
 				7'b1100111: begin   // Tipo SB (bne)
-					SelMux2 = 0;
-					SelMux4 = 3;
-					PCwrite = 0;
-                                        AluOperation = SUM;
-                                        exitState = 0;
-					loadRegAluOut = 1;
-					loadRegA = 1;
-					loadRegB = 1;
-					SelMuxPC = 1;
-                                        state = bneOP;
+					state = bneOP1;
 
-					
                                 end
+
+				7'b1100011: begin // lui
+					state = memDRead1;
+				end
 			endcase
+		end
+
+			sumOP1:begin
+				SelMux2 = 1;
+				SelMux4 = 0;
+                                exitState = 0;
+                                AluOperation = SUM;
+                                loadRegAluOut = 1;
+				state = sumOP2;
 			end
-			
-			sumOP: begin
+
+			sumOP2: begin
 				PCwrite = 0;
 				PCWriteCond = 0;
 				SelMuxPC = 0;
@@ -174,37 +149,100 @@ module Controle(
 				loadRegA = 0;
 				loadRegB = 0;
 				loadRegAluOut = 1;
-				RegWrite = 0;
+				RegWrite = 1;
 				SelMuxMem = 0;
 				loadRegMemData = 0;
 				MemData_Read = 0;
 				MemRead = 0;
 				LoadIR = 0;
-				state = sumsubWrite;
+				state = sumsubWrite1;
 			end
 			
+			subOP1:begin
+				SelMux2 = 1;
+				SelMux4 = 0;
+				exitState = 0;
+				AluOperation = SUB;
+				loadRegAluOut = 1;
+				state = subOP2;
+			end
 
-			subOP:  begin
+			subOP2:  begin
 				PCwrite = 0;
 				PCWriteCond = 0;
 				SelMuxPC = 0;
-				AluOperation = SUM;
+				AluOperation = SUB;
 				SelMux2 = 0;
 				SelMux4 = 1;
 				loadRegA = 0;
 				loadRegB = 0;
 				loadRegAluOut = 1;
-				RegWrite = 0;
+				RegWrite = 1;
 				SelMuxMem = 0;
 				loadRegMemData = 0;
 				MemData_Read = 0;
 				MemRead = 0;
 				LoadIR = 0;
-				state = sumsubWrite;
+				state = sumsubWrite1;
 			end
 
-			LAS: begin
+			beqOP1: begin
+				SelMux2 = 0;
+				SelMux4 = 3;
 				PCwrite = 0;
+                                AluOperation = SUM;
+                                exitState = 0;
+				loadRegAluOut = 1;
+				loadRegA = 1;
+				loadRegB = 1;
+				SelMuxPC = 1;
+				state = beqOP2;
+			end
+
+			beqOP2: begin	
+					AluOperation = SUB;
+                                        PCWriteCond = 1;
+                                        if (AluZero == 1) begin
+                                        PCwrite = 1;
+                                   	end
+                                        if (AluZero == 0) begin
+                                            PCwrite = 0;
+                                            PCWriteCond = 1'bx;
+					end
+					state = FETCH;
+			end
+	
+			bneOP1: begin
+				SelMux2 = 0;
+				SelMux4 = 3;
+				PCwrite = 0;
+                                AluOperation = SUM;
+                                exitState = 0;
+				loadRegAluOut = 1;
+				loadRegA = 1;
+				loadRegB = 1;
+				SelMuxPC = 1;
+				state = bneOP2;
+			end
+                                        
+			bneOP2:begin
+					AluOperation = SUB;                                      
+                                        if (AluZero == 0) begin
+                                        	PCwrite = 1;
+						PCWriteCond = 1'bx;
+                                   	end
+                                        if (AluZero == 1) begin
+                                        	PCwrite = 0;
+                                        	PCWriteCond = 0;
+					end
+					state = FETCH;
+			end
+			
+			sumsubWrite1: begin
+			 	AluOperation = LOAD;
+                                exitState = 0;
+				loadRegAluOut = 1;
+                                PCwrite = 0;
 				PCWriteCond = 0;
 				SelMuxPC = 0;
 				AluOperation = SUM;
@@ -219,49 +257,10 @@ module Controle(
 				MemData_Read = 0;
 				MemRead = 0;
 				LoadIR = 0;
-				case (INSTR[6:0]) //Por OPCODE
-					7'b0100011: //tipo S
-					begin
-						state = memDWrite; //calcula o OFFSET para o LOAD, STORE, E ADDI
-					end
-					7'b0010011: //tipo I (ADDI)
-					begin
-						state = sumsubWrite; //calcula o OFFSET para o LOAD, STORE, E ADDI
-					end
-					7'b0000011: //tipo I (LD)
-					begin
-						state = memDRead; //calcula o OFFSET para o LOAD, STORE, E ADDI
-					end
-					endcase
-				end 
-
-			beqOP: begin	
-					AluOperation = SUB;
-                                        PCWriteCond = 1;
-                                        if (AluZero == 1) begin
-                                        PCwrite = 1;
-                                   	end
-                                        if (AluZero == 0) begin
-                                            PCwrite = 0;
-                                            PCWriteCond = 1'bx;
-					end
-					state = FETCH;
+				state = sumsubWrite2;
 			end
 
-			bneOP:begin
-					AluOperation = SUB;                                      
-                                        if (AluZero == 0) begin
-                                        	PCwrite = 1;
-						PCWriteCond = 1'bx;
-                                   	end
-                                        if (AluZero == 1) begin
-                                        	PCwrite = 0;
-                                        	PCWriteCond = 0;
-					end
-					state = FETCH;
-			end
-
-			sumsubWrite: begin
+			sumsubWrite2: begin
 				PCwrite = 0;
 				PCWriteCond = 0;
 				SelMuxPC = 0;
@@ -280,26 +279,66 @@ module Controle(
 				state = FETCH;
                  	end
 			
-			memDRead: begin
+			memDRead1: begin
+				 exitState = 0;
 				PCwrite = 0;
 				PCWriteCond = 0;
 				SelMuxPC = 0;
 				AluOperation = LOAD;
-				SelMux2 = 0;
-				SelMux4 = 0;
+				SelMux2 = 1;
+				SelMux4 = 2;
+				loadRegA = 0;
+				loadRegB = 0;
+				loadRegAluOut = 1;
+				RegWrite = 0;
+				SelMuxMem = 0;
+				loadRegMemData = 0;
+				MemData_Read = 0;
+				MemRead = 0;
+				LoadIR = 0;
+				state = memDRead2;
+			end
+
+			memDRead2: begin
+				PCwrite = 0;
+				PCWriteCond = 0;
 				loadRegA = 0;
 				loadRegB = 0;
 				loadRegAluOut =0;
 				RegWrite = 0;
 				SelMuxMem = 0;
 				loadRegMemData = 1;
-				MemData_Read = 0;
+				MemData_Read = 1;
 				MemRead = 0;
 				LoadIR = 0;
 				state = loadWrite;
 			end
 
-			memDWrite: begin
+			memDWrite1: begin
+				SelMux2 = 1;
+				SelMux4 = 2;
+                                AluOperation = LOAD;
+                                exitState = 0;
+				loadRegAluOut = 1;
+                                PCwrite = 0;
+				PCWriteCond = 0;
+				SelMuxPC = 0;
+				AluOperation = SUM;
+				SelMux2 = 1;
+				SelMux4 = 2;
+				loadRegA = 0;
+				loadRegB = 0;
+				loadRegAluOut =1;
+				RegWrite = 0;
+				SelMuxMem = 0;
+				loadRegMemData = 0;
+				MemData_Read = 0;
+				MemRead = 0;
+				LoadIR = 0;
+				state = memDWrite2;
+			end
+
+			memDWrite2: begin
 				PCwrite = 0;
 				PCWriteCond = 0;
 				SelMuxPC = 0;
@@ -323,12 +362,11 @@ module Controle(
 				PCwrite = 0;
 				PCWriteCond = 0;
 				SelMuxPC = 0;
-				AluOperation = LOAD;
 				SelMux2 = 0;
 				SelMux4 = 0;
 				loadRegA = 0;
 				loadRegB = 0;
-				loadRegAluOut =0;
+				loadRegAluOut = 0;
 				RegWrite = 1;
 				SelMuxMem = 1;
 				loadRegMemData = 0;
@@ -336,7 +374,6 @@ module Controle(
 				MemRead = 0;
 				LoadIR = 0;
 				state = FETCH;
-
 			end
 			
 			/*lui: begin
@@ -356,112 +393,8 @@ module Controle(
 				MemRead = 0;
 				LoadIR = 0;
 				state = FETCH;
-				 end */
-
-                        /*    7'b1100011: begin   // Tipo SB (BEQ)
-                            stateBeq = BEQ_INIT;
-                                case(stateBeq)
-                                    BEQ_INIT: begin
-                                        SelMux2 = 0;
-                                        SelMux4 = 3;
-                                        MemRead = 0;
-                                    	loadRegAluOut = 1;
-                                        loadRegA = 1;
-                                        loadRegB = 1;
-                                        LoadIR = 0;
-                                        exitState = 0;
-                                    	SelMuxPC = 1;
-                                        stateBeq = BEQ_COMP;
-                                    end
-                 
-                                    BEQ_COMP: begin
-                                        AluOperation = SUB;
-                                        PCWriteCond = 1;
-                                        SelMuxPC = 1;
-                                        if (AluZero == 1) begin
-                                        PCwrite = 1;
-                                    end
-                                        if (AluZero == 0) begin
-                                            PCwrite = 0;
-                                            PCWriteCond = 1'bx;
-                                    end
-                                    end
-                                endcase
-                                state = FETCH;
-                            end
-   
-                            7'b1100111: begin   // Tipo SB (BNE)
-                                exitState = 0;
-                                SelMux2 = 1;
-                                SelMux4 = 0;
-                                MemRead = 0;
-                                LoadIR = 0;
-                                AluOperation = SUB;
-                                SelMuxPC = 1;
-                                PCWriteCond = 0;
-                                if (AluZero) begin
-                                    PCwrite = 0;
-                                end
-                                state = FETCH;
-                            end
- 		*/
-             
-            /*              7'b0110111: begin   // Tipo U (LUI)
-                                PCwrite = 0;
-                                MemRead = 0;
-                                LoadIR = 1;
-                                SelMux2 = 1;
-                                SelMux4 = 2;
-                                loadRegA = 1;
-                                loadRegB = 0;
-                                loadRegAluOut = 1;
-                                exitState = 10;
-                                AluOperation = SUB;
-                                    nextState = BEQ_DATA;
-                            end
-       
-                            BEQ_DATA: begin
-                                MemData_Read = 1;
-                                RegWrite = 0;
-                                    loadRegMemData = 1;
-                                nextState = BEQ_DATA_COMP;
-                            end */
-		/*LOAD_DATA: begin
-                                        AluOperation = SUM;
-                                        MemData_Read = 1;
-                                            loadRegMemData = 1;
-                                        stateLoad = LOAD_DATA_COMP;
-                                    end
-               
-                                    LOAD_DATA_COMP: begin
-                                        loadRegMemData = 1;
-                                        SelMuxMem = 1;
-                                        RegWrite = 1;
-                                        $stop;
-                                    end
-   		case (stateAddi)
-                                    ADDI_INIT: begin
-                                        PCwrite = 0;
-                                        MemRead = 0;
-                                        LoadIR = 0;
-                                        SelMux2 = 1;
-                                        SelMux4 = 2;
-                                        loadRegA = 1;
-                                        loadRegB = 0;
-                                        loadRegAluOut = 1;
-                                        exitState = 0;
-                                        AluOperation = SUM ;
-                                            stateAddi = ADDI_COMP;
-                                    end
-   
-                                    ADDI_COMP: begin
-                                        SelMuxMem = 0;
-                                        RegWrite = 1;
-                                    end
-                                endcase
-                                state = FETCH;
-		*/
-           
+				end 
+ 			*/
             	endcase
 	   end
         end
