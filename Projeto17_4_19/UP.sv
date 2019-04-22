@@ -36,7 +36,7 @@ module UP
 	 output logic [63:0] MuxPC_Exit,
 	 output logic [63:0]dataout1,
 	 output logic [63:0]dataout2,
-	 output logic exitState,
+	 output logic [5:0]exitState,
 	 output logic [5:0] Num,
          output logic [1:0] Shift,
 	 output logic [2:0] AluOperation,

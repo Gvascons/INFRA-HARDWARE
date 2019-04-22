@@ -11,7 +11,7 @@ module Controle(
     output logic loadRegB,
     output logic loadRegAluOut,
     output logic SelMux2,
-    output logic [2:0]SelMux3,
+    //output logic [2:0]SelMux3,
     output logic [2:0]SelMuxMem,
     output logic RegWrite,
     output logic PCWriteCond,
@@ -46,7 +46,7 @@ module Controle(
     parameter lui = 19;
  
     reg [5:0]state;
-	reg [5:0]nextState;
+    reg [5:0]nextState;
  
 	always_ff @(posedge rst or posedge clk) begin
         	if (rst) begin
@@ -160,25 +160,14 @@ module Controle(
 		end
 
 			sumOP1:begin
-					endcase
-					nextState = RESET2;
-
-			end
-                                        
-			bneOP1: begin
 				SelMux2 = 1;
 				SelMux4 = 0;
-				AluOperation =SUB;
-				exitState = 6;                                    
-                                        if (AluZero == 0) begin
-				SelMux2 = 1;
-				SelMux4 = 0;
-                                exitState = 3;
-                                AluOperation = SUM;
-                                loadRegAluOut = 1;
+				exitState = 3;
+				AluOperation = SUM;
+				loadRegAluOut = 1;
 				nextState = sumOP2;
 			end
-
+                                        
 			sumOP2: begin
 				PCwrite = 0;
 				PCWriteCond = 0;
@@ -209,8 +198,7 @@ module Controle(
 			subOP2:  begin
 				PCwrite = 0;
 				PCWriteCond = 0;
-				SelMuxPC = 1
-;
+				SelMuxPC = 1;
 				SelMux2 = 0;
 				SelMux4 = 1;
 				loadRegA = 0;
@@ -236,7 +224,7 @@ module Controle(
 					    SelMuxPC = 1;
 					    PCWriteCond = 1;
                                    	end
-                                        2 : begin
+                                        0 : begin
                                             PCwrite = 0;
                                             PCWriteCond = 0;
 					end
@@ -401,9 +389,10 @@ module Controle(
 			end
 			
 			lui: begin
+				PCwrite = 0;
 				RegWrite = 1;
 				SelMux2 = 0;
-				SelMux3 = 2;
+				SelMuxMem = 2;
 				SelMux4 = 2;
 				loadRegA = 0;
 				loadRegB = 0;

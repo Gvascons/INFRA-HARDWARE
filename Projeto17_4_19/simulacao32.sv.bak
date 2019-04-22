@@ -27,7 +27,7 @@ module simulacao32;
 	 logic MemRead; 
 	 logic SelMux2;
 	 logic [1:0]SelMux4;
-	 logic [2:0]SelMuxMem;
+	 logic SelMuxMem;
 	 logic SelMuxPC;
      	 logic PCwrite;
 	 logic LoadIR;
