@@ -243,7 +243,7 @@ module Controle(
 				Shift = 0;
 				SelMux2 = 1;
 			    	SelMux4 = 0;
-			       	SelMuxMem = 0;
+			       	SelMuxMem = 1;
 				RegWrite = 0;
 			    	MemRead = 0;
 				MemData_Read = 0;
@@ -266,7 +266,7 @@ module Controle(
 				endcase
 				nextState = RESET;
 			end
-                                        
+                             /*           
 			bneOP1: begin
 				Shift = 0;
 				SelMux2 = 1;
@@ -292,7 +292,35 @@ module Controle(
 				end
 				nextState = RESET;
 			end
-			
+			*/
+			bneOP1: begin
+				Shift = 0;
+				SelMux2 = 1;
+			    	SelMux4 = 0;
+			       	SelMuxMem = 1;
+				RegWrite = 0;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
+			    	AluOperation = SUB;
+                                case (AluZero) 
+					0: begin
+                                            	PCwrite = 1;
+					    	SelMuxPC = 1;
+					    	PCWriteCond = 1;
+                                   	end
+                                        1: begin
+                                            	PCwrite = 0;
+                                            	PCWriteCond = 0;
+					end
+				endcase
+				nextState = RESET;
+			end
+
 			sumsubWrite1: begin //REVER ESSE ESTADO
 				Shift = 0;
 				SelMuxPC = 0;
