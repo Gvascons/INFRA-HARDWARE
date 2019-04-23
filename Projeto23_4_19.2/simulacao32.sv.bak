@@ -64,7 +64,7 @@ module simulacao32;
 	 logic AluZero;
 	 logic AluIgual;
 	 logic PCWriteCond;
-;
+
 	//Memoria32 meminst (.raddress(rdaddress), .waddress(wdaddress),
 	//.Clk(clk), .Datain(data), .Dataout(q), .Wr(Wr));
 /*
@@ -114,7 +114,8 @@ module simulacao32;
 	   .i6_0(i6_0),
 	   .i31_0(i31_0),
 	   .SignExit(SignExit),
-	   .ShiftExit(ShiftExit),
+	   .ShiftLeftExit(ShiftLeftExit),
+	   // .ShiftExit(ShiftExit),
 	   .MemExit(MemExit),
 	   .MuxA_Exit(MuxA_Exit),
 	   .MuxB_Exit(MuxB_Exit),

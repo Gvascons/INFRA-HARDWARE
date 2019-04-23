@@ -27,7 +27,8 @@ module UP (
 	output logic [6:0] i6_0,
 	output logic [31:0] i31_0,
 	output logic [63:0] SignExit,
-	output logic [63:0] ShiftExit,
+	// output logic [63:0] ShiftExit,
+	output logic [63:0] ShiftLeftExit,
 	output logic [31:0] MemExit,
 	output logic [63:0] MuxA_Exit,
 	output logic [63:0] MuxB_Exit,
@@ -37,7 +38,7 @@ module UP (
 	output logic [63:0] dataout2,
 	output logic [5:0] Num,
         output logic [1:0] Shift,
-	logic [2:0] AluOperation,
+	output logic [2:0] AluOperation,
 	output logic PCWriteCond,
 	output logic AluZero,
 	output logic AluIgual);
@@ -68,6 +69,7 @@ module UP (
 		.MemData_Read(MemData_Read), //DMemRead
 		.PCWriteCond(PCWriteCond)); //PCWriteCond
 
+
 	register PC (
 		.clk(clk),
 		.reset(rst),
@@ -94,17 +96,24 @@ module UP (
 		.Instr6_0(i6_0),
 		.Instr31_0(i31_0));
 
-	
+
 	SignExtend sinalExt (
 		.entrada(i31_0),
 		.saida(SignExit));
 
 
-	Deslocamento ShiftDesloc (
+	/*Deslocamento ShiftDesloc (
 		.In(SignExit),
  		.Num(Num),
 		.Shift(Shift),
-		.Out(ShiftExit));			
+		.Out(ShiftExit)); */
+	
+	Deslocamento ShiftLeft (
+		.In(SignExit),
+ 		.Num(6'd1),
+		.Shift(2'd0),
+		.Out(ShiftLeftExit));
+	 			
 
 
 	bancoReg Banco_Reg (
@@ -147,7 +156,7 @@ module UP (
 		.MuxB_a(RegB_Exit),
 		.MuxB_b(PCincrement),
 		.MuxB_c(SignExit),
-		.MuxB_d(ShiftExit),
+		.MuxB_d(ShiftLeftExit),
 		.f_4in(MuxB_Exit));
 
 
@@ -198,6 +207,5 @@ module UP (
 		.MuxC_b(MemDataReg_Exit),
 		.MuxC_c(SignExit),
 		.f_3in(MuxMem_Exit));
-	
 
 endmodule 

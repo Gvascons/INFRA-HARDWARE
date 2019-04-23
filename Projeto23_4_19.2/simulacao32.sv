@@ -50,7 +50,7 @@ module simulacao32;
 	 logic [6:0] i6_0;
 	 logic [31:0] i31_0;
 	 logic [63:0] SignExit;
-	 logic [63:0] ShiftExit;
+	 logic [63:0] ShiftLeftExit;
 	 logic [31:0] MemExit;
 	 logic [63:0] MuxA_Exit;
 	 logic [63:0] MuxB_Exit;
@@ -114,7 +114,8 @@ module simulacao32;
 	   .i6_0(i6_0),
 	   .i31_0(i31_0),
 	   .SignExit(SignExit),
-	   .ShiftExit(ShiftExit),
+	   .ShiftLeftExit(ShiftLeftExit),
+	   // .ShiftExit(ShiftExit),
 	   .MemExit(MemExit),
 	   .MuxA_Exit(MuxA_Exit),
 	   .MuxB_Exit(MuxB_Exit),

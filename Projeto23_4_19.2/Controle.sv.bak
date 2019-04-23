@@ -2,8 +2,8 @@ module Controle(
     	input logic clk,
     	input logic rst,
     	input logic [31:0] INSTR,
-	output logic AluZero,
-    	output logic AluIgual,
+	input logic AluZero,
+    	input logic AluIgual,
 	output logic [1:0]Shift,
 	output logic [5:0]Num,
     	output logic PCwrite,
@@ -61,49 +61,64 @@ module Controle(
 
 	always_comb begin
 		case(state)
-
 			RESET: begin
 				Shift = 0;
+				SelMuxPC = 0;
 				SelMux2 = 0;
     	        		SelMux4 = 0;
     	       			SelMuxMem = 0;
     	       			PCwrite = 0;
+				PCWriteCond = 0;
 				RegWrite = 0;
     	      			MemRead = 0;
     	       			LoadIR = 0;
     	        		loadRegA = 0;
     	       			loadRegB = 0;
     	        		AluOperation = 0;
-    	        		AluZero = 0;
+				loadRegMemData = 0;
+				MemData_Read = 0;
+				loadRegAluOut = 0;
     	        		nextState = FETCH;
 			end
 
                 	FETCH: begin
-                        	SelMuxPC = 0;
-                        	SelMux2 = 0;
-                        	SelMux4 = 1;
-                        	SelMuxMem = 1;
-    	                    	PCwrite = 1;
-    		                MemRead = 1;
-    		                LoadIR = 1;
-    	                    	loadRegAluOut = 0;
-    	                    	AluOperation = SUM;
+				Shift = 0;
+				SelMuxPC = 0;
+				SelMux2 = 0;
+			    	SelMux4 = 1;
+			       	SelMuxMem = 1;
+			    	PCwrite = 1;
+				PCWriteCond = 0;
+				RegWrite = 0;
+			    	MemRead = 1;
+			    	LoadIR = 1;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
+				MemData_Read = 0;
+			    	AluOperation = SUM;
     	                    	nextState = DECODE;
                 	end
  
                 	DECODE: begin
-                        	SelMuxPC = 0;
-                        	SelMux2 = 0;
-                        	SelMux4 = 3;
-                    		loadRegA = 1;
-                        	loadRegB = 1;
-                        	PCwrite = 0;
-                       	 	SelMuxMem = 0;
-                        	MemRead = 1;
-                        	LoadIR = 0;
-                        	loadRegAluOut = 1;
-                        	AluOperation = SUM;
-       
+				Shift = 0;
+				SelMuxPC = 0;
+				SelMux2 = 0;
+			    	SelMux4 = 3;
+			       	SelMuxMem = 0;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
+				RegWrite = 0;
+			    	MemRead = 1;
+			    	LoadIR = 0;
+			    	loadRegA = 1;
+			    	loadRegB = 1;
+				loadRegAluOut = 1;
+				loadRegMemData = 0;
+				MemData_Read = 0;
+			    	AluOperation = SUM;
+                        	
 				case(INSTR[6:0])
 					7'b0000000: begin
 						nextState = RESET; 
@@ -145,85 +160,132 @@ module Controle(
 			end
 
 			sumOP1: begin
+				Shift = 0;
+				SelMuxPC = 0;
 				SelMux2 = 1;
-				SelMux4 = 0;
-				AluOperation = SUM;
+			    	SelMux4 = 0;
+			       	SelMuxMem = 0;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
+				RegWrite = 0;
+			    	MemRead = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
 				loadRegAluOut = 1;
+				loadRegMemData = 0;
+				MemData_Read = 0;
+			    	AluOperation = SUM;
 				nextState = sumOP2;
 			end
                                         
 			sumOP2: begin
-				PCwrite = 0;
-				PCWriteCond = 0;
+				Shift = 0;
 				SelMuxPC = 0;
 				SelMux2 = 0;
-				SelMux4 = 1;
-				loadRegA = 0;
-				loadRegB = 0;
-				loadRegAluOut = 0;
+			    	SelMux4 = 1;
+			       	SelMuxMem = 1;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
 				RegWrite = 1;
-				SelMuxMem = 1;
+			    	MemRead = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
 				loadRegMemData = 0;
 				MemData_Read = 0;
-				MemRead = 0;
-				LoadIR = 0;
-
+			    	AluOperation = 0;
 				nextState = RESET;
 			end
 			
 			subOP1: begin
+				Shift = 0;
+				SelMuxPC = 0;
 				SelMux2 = 1;
-				SelMux4 = 0;
-				AluOperation = SUB;
+			    	SelMux4 = 0;
+			       	SelMuxMem = 0;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
+				RegWrite = 0;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
 				loadRegAluOut = 1;
+				loadRegMemData = 0;
+			    	AluOperation = SUB;
 				nextState = subOP2;
 			end
 
 			subOP2: begin
-				PCwrite = 0;
-				PCWriteCond = 0;
+				Shift = 0;
 				SelMuxPC = 1;
 				SelMux2 = 0;
-				SelMux4 = 1;
-				loadRegA = 0;
-				loadRegB = 0;
-				loadRegAluOut = 0;
+			    	SelMux4 = 1;
+			       	SelMuxMem = 1;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
 				RegWrite = 1;
-				SelMuxMem = 1;
-				loadRegMemData = 0;
+			    	MemRead = 0;
 				MemData_Read = 0;
-				MemRead = 0;
-				LoadIR = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
+			    	AluOperation = 0;
 				nextState = RESET;
 			end
 
 			beqOP1: begin
+				Shift = 0;
 				SelMux2 = 1;
-				SelMux4 = 0;
-                                case (AluIgual) 
+			    	SelMux4 = 0;
+			       	SelMuxMem = 0;
+				RegWrite = 0;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
+			    	AluOperation = SUB;
+                                case (AluZero) 
 					1: begin
-                                            PCwrite = 1;
-					    SelMuxPC = 1;
-					    PCWriteCond = 1;
+                                            	PCwrite = 1;
+					    	SelMuxPC = 1;
+					    	PCWriteCond = 1;
                                    	end
                                         0: begin
-                                            PCwrite = 0;
-                                            PCWriteCond = 0;
+                                            	PCwrite = 0;
+                                            	PCWriteCond = 0;
 					end
 				endcase
 				nextState = RESET;
-
 			end
                                         
 			bneOP1: begin
+				Shift = 0;
 				SelMux2 = 1;
-				SelMux4 = 0;
-				AluOperation = SUB;                                  
+			    	SelMux4 = 0;
+			       	SelMuxMem = 0;
+				RegWrite = 0;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
+			    	AluOperation = SUB;                   
                                 if (AluZero == 0) begin
                                         PCwrite = 1;
 					SelMuxPC = 1; 
 					PCWriteCond = 0;
-                                   end
+                                end
                                 if (AluZero == 1) begin
                                         PCwrite = 0;
                                         PCWriteCond = 0;
@@ -231,9 +293,28 @@ module Controle(
 				nextState = RESET;
 			end
 			
-			sumsubWrite1: begin
-			 	AluOperation = SUM;
+			sumsubWrite1: begin //REVER ESSE ESTADO
+				Shift = 0;
+				SelMuxPC = 0;
+				SelMux2 = 1;
+			    	SelMux4 = 2;
+			       	SelMuxMem = 1;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
+				RegWrite = 0;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
 				loadRegAluOut = 1;
+				loadRegMemData = 0;
+			    	AluOperation = SUM;
+				nextState = sumsubWrite2;
+
+
+			 	/*
+				
                                 PCwrite = 0;
 				PCWriteCond = 0;
 				SelMuxPC = 0;
@@ -249,63 +330,70 @@ module Controle(
 				MemData_Read = 0;
 				MemRead = 0;
 				LoadIR = 0;
-				nextState = sumsubWrite2;
+				nextState = sumsubWrite2;*/
 			end
 
 			sumsubWrite2: begin
-				PCwrite = 0;
-				PCWriteCond = 0;
+				Shift = 0;
 				SelMuxPC = 1;
-				AluOperation = SUM;
 				SelMux2 = 0;
-				SelMux4 = 0;
-				loadRegA = 0;
-				loadRegB = 0;
-				loadRegAluOut = 0;
+			    	SelMux4 = 0;
+			       	SelMuxMem = 0;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
 				RegWrite = 1;
-				SelMuxMem = 1;
-				loadRegMemData = 0;
+			    	MemRead = 0;
 				MemData_Read = 0;
-				MemRead = 0;
-				LoadIR = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
+			    	AluOperation = SUM;
 				nextState = RESET;
                  	end
 			
 			memDRead1: begin
-				PCwrite = 0;
-				PCWriteCond = 0;
+				Shift = 0;
 				SelMuxPC = 0;
 				AluOperation = SUM;
 				SelMux2 = 1;
-				SelMux4 = 2;
-				loadRegA = 0;
-				loadRegB = 0;
-				loadRegAluOut = 1;
+			    	SelMux4 = 2;
+			       	SelMuxMem = 1;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
 				RegWrite = 0;
-				SelMuxMem = 1;
-				loadRegMemData = 0;
+			    	MemRead = 0;
 				MemData_Read = 0;
-				MemRead = 0;
-				LoadIR = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 1;
+				loadRegMemData = 0;
 				nextState = memDRead2;
 			end
 
 			memDRead2: begin
-				PCwrite = 0;
+				Shift = 0;
+				SelMuxPC = 0;
+				SelMux2 = 0;
+			    	SelMux4 = 0;
+			       	SelMuxMem = 1;
+			    	PCwrite = 0;
 				PCWriteCond = 0;
-				loadRegA = 0;
-				loadRegB = 0;
-				loadRegAluOut =0;
 				RegWrite = 0;
-				SelMuxMem = 1;
-				loadRegMemData = 1;
+			    	MemRead = 0;
 				MemData_Read = 1;
-				MemRead = 0;
-				LoadIR = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 1;
+			    	AluOperation = 0;
 				nextState = loadWrite;
 			end
 
-			memDWrite1: begin
+			memDWrite1: begin  //REVER ESSE ESTADO
 				SelMux2 = 1;
 				SelMux4 = 2;
                                 AluOperation = SUM;
@@ -318,7 +406,7 @@ module Controle(
 				SelMux4 = 2;
 				loadRegA = 0;
 				loadRegB = 0;
-				loadRegAluOut =1;
+				loadRegAluOut = 1;
 				RegWrite = 0;
 				SelMuxMem = 1;
 				loadRegMemData = 0;
@@ -329,51 +417,62 @@ module Controle(
 			end
 
 			memDWrite2: begin
-				PCwrite = 0;
-				PCWriteCond = 0;
+				Shift = 0;
 				SelMuxPC = 0;
 				AluOperation = SUM;
 				SelMux2 = 0;
-				SelMux4 = 0;
-				loadRegA = 0;
-				loadRegB = 0;
-				loadRegAluOut =0;
+			    	SelMux4 = 0;
+			       	SelMuxMem = 1;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
 				RegWrite = 0;
-				SelMuxMem = 1;
-				loadRegMemData = 0;
+			    	MemRead = 0;
 				MemData_Read = 1;
-				MemRead = 0;
-				LoadIR = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
 				nextState = RESET;
-
 			end
 
 			loadWrite: begin
-				PCwrite = 0;
-				PCWriteCond = 0;
+				Shift = 0;
 				SelMuxPC = 0;
 				SelMux2 = 0;
-				SelMux4 = 0;
-				loadRegA = 0;
-				loadRegB = 0;
-				loadRegAluOut = 0;
+			    	SelMux4 = 0;
+			       	SelMuxMem = 1;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
 				RegWrite = 1;
-				SelMuxMem = 1;
-				loadRegMemData = 0;
+			    	MemRead = 0;
 				MemData_Read = 0;
-				MemRead = 0;
-				LoadIR = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
+			    	AluOperation = 0;
 				nextState = RESET;
 			end
 			
 			lui: begin
-				PCwrite = 0;
-				RegWrite = 1;
+				Shift = 0;
+				SelMuxPC = 0;
 				SelMux2 = 0;
-				SelMuxMem = 2;
-				SelMux4 = 2;
-				loadRegA = 0;
-				loadRegB = 0;
+			    	SelMux4 = 2;
+			       	SelMuxMem = 2;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
+				RegWrite = 1;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
+			    	AluOperation = 0;
 				nextState = RESET;
 			end 
             	endcase
