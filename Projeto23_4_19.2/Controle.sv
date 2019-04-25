@@ -255,6 +255,7 @@ module Controle(
 			    	AluOperation = SUB;
                                 case (AluZero) 
 					1: begin
+						PCwrite = 1;
 					    	SelMuxPC = 1;
 					    	PCWriteCond = 1;
                                    	end
@@ -308,6 +309,7 @@ module Controle(
 			    	AluOperation = SUB;
                                 case (AluZero) 
 					0: begin
+						PCwrite = 1;
 					    	SelMuxPC = 1;
 					    	PCWriteCond = 1;
                                    	end
