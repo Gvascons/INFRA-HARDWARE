@@ -10,7 +10,7 @@ cModel Technology
 dC:/intelFPGA/17.0
 vbancoReg
 Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z1 !s110 1556478784
+Z1 !s110 1556489143
 !i10b 1
 !s100 64T=Q6d5@]ik;4LP:;MQz2
 IB<L<cDnaaK[N=j]@;CQAg1
@@ -26,7 +26,7 @@ Z5 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z6 !s108 1556478784.000000
+Z6 !s108 1556489143.000000
 !s107 C:/Users/plc3/Desktop/Projeto/bancoReg.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/bancoReg.sv|
 !i113 1
@@ -37,13 +37,13 @@ vControle
 R0
 R1
 !i10b 1
-!s100 VNf5fJEUR0`3<Z=n:=Ean2
-Il3Dk^gi5g3OnB]kJG:mP@3
+!s100 2Y_dL1;VX:j4H<<faiZLF3
+ICG0R:>UGI?7<U6V^Wh_Ul0
 R2
 !s105 Controle_sv_unit
 S1
 R3
-w1556477966
+w1556485783
 8C:/Users/plc3/Desktop/Projeto/Controle.sv
 FC:/Users/plc3/Desktop/Projeto/Controle.sv
 L0 1
@@ -60,7 +60,7 @@ R8
 n@controle
 vDeslocamento
 R0
-R1
+Z9 !s110 1556489144
 !i10b 1
 !s100 Z11::aGc@_;0Yk=glAQ?z2
 I4iS6[Em=CC4JzPkH3JPWT0
@@ -85,36 +85,36 @@ R8
 n@deslocamento
 Einstr_reg_risc_v
 R4
-Z9 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
-Z10 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z10 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z11 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
 R3
-Z11 8C:/Users/plc3/Desktop/Projeto/Instr_Reg_RISC_V.vhd
-Z12 FC:/Users/plc3/Desktop/Projeto/Instr_Reg_RISC_V.vhd
+Z12 8C:/Users/plc3/Desktop/Projeto/Instr_Reg_RISC_V.vhd
+Z13 FC:/Users/plc3/Desktop/Projeto/Instr_Reg_RISC_V.vhd
 l0
 L49
 VB5`a<R]^i3@BR]JPPmelC3
 !s100 ZklCa4iZ@TNXUFBBiZChh3
-Z13 OV;C;10.5b;63
+Z14 OV;C;10.5b;63
 32
-Z14 !s110 1556478785
+R9
 !i10b 1
-Z15 !s108 1556478785.000000
+Z15 !s108 1556489144.000000
 Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/plc3/Desktop/Projeto/Instr_Reg_RISC_V.vhd|
 Z17 !s107 C:/Users/plc3/Desktop/Projeto/Instr_Reg_RISC_V.vhd|
 !i113 1
 Z18 o-work work -2002 -explicit
 Z19 tExplicit 1 CvgOpt 0
 Abehavioral_arch
-R9
 R10
+R11
 DEx4 work 16 instr_reg_risc_v 0 22 B5`a<R]^i3@BR]JPPmelC3
 l68
 L65
 Vo8SZoo^`iHF7`CU3CnhD`1
 !s100 e?bWG@:SnkVC476;`5UQ[1
-R13
-32
 R14
+32
+R9
 !i10b 1
 R15
 R16
@@ -124,7 +124,7 @@ R18
 R19
 vMemoria32
 R0
-R14
+R9
 !i10b 1
 !s100 Q2gmKA>Pd1H;3=f[e^lb[3
 I1Zzmj<O<RhmUQ51Dn6^[K1
@@ -149,7 +149,7 @@ R8
 n@memoria32
 vMemoria64
 R0
-Z21 !s110 1556478783
+Z21 !s110 1556489142
 !i10b 1
 !s100 1fz3Mgbi`W1QjWk]9CgUO3
 ICX9]8F;iXX8CN;jKzLgXI1
@@ -165,7 +165,7 @@ R5
 r1
 !s85 0
 31
-Z22 !s108 1556478783.000000
+Z22 !s108 1556489142.000000
 !s107 C:/Users/plc3/Desktop/Projeto/Memoria64.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/Memoria64.sv|
 !i113 1
@@ -364,8 +364,8 @@ R8
 Eula64
 R4
 Z25 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
-R9
 R10
+R11
 R3
 Z26 8C:/Users/plc3/Desktop/Projeto/ula64.vhd
 Z27 FC:/Users/plc3/Desktop/Projeto/ula64.vhd
@@ -373,7 +373,7 @@ l0
 L55
 Vh8o2dPm9b1=EQMJMfPghZ1
 !s100 T1SZ4lW`0`^P2jjFke>h@2
-R13
+R14
 32
 R1
 !i10b 1
@@ -385,14 +385,14 @@ R18
 R19
 Abehavioral
 R25
-R9
 R10
+R11
 DEx4 work 5 ula64 0 22 h8o2dPm9b1=EQMJMfPghZ1
 l81
 L71
 VI^EZmCUhUmlGjFianCgP23
 !s100 ?`9nGLOjDUedegnVSE5YV0
-R13
+R14
 32
 R1
 !i10b 1

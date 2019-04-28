@@ -14,7 +14,6 @@ module Controle(
     	output logic loadRegB,
     	output logic loadRegAluOut,
     	output logic SelMux2,
-    	//output logic [2:0]SelMux3,
     	output logic [2:0]SelMuxMem,
     	output logic RegWrite,
     	output logic PCWriteCond,
@@ -26,7 +25,6 @@ module Controle(
     	parameter SUM = 3'b001; //1
     	parameter SUB = 3'b010; //2
     	parameter LOAD = 3'b000; //0
-	// parameter AND = 3'b011; //3
  	
     	//ESTADOS DA MÁQUINA DE ESTADOS
     	parameter RESET = 20;
@@ -38,14 +36,15 @@ module Controle(
     	parameter subOP2 = 7; 
     	parameter beqOP1 = 8;
     	parameter bneOP1 = 10; 
-    	parameter sumsubWrite1 = 12;
-    	parameter sumsubWrite2 = 13;
-    	parameter memDRead1 = 14;
-    	parameter memDRead2 = 15;
+    	parameter sumsubWrite1 = 11;
+    	parameter sumsubWrite2 = 12;
+    	parameter memDRead1 = 13;
+    	parameter memDRead2 = 14;
+	parameter loadWrite = 15;
     	parameter memDWrite1 = 16;
     	parameter memDWrite2 = 17;
-    	parameter loadWrite = 18;
-    	parameter lui = 19;
+    	parameter lui1 = 18;
+	parameter lui2 = 19;
  
     	reg [5:0]state;
     	reg [5:0]nextState;
@@ -121,7 +120,7 @@ module Controle(
                         	
 				case(INSTR[6:0])
 					7'b0000000: begin
-						nextState = RESET; 
+						nextState = FETCH; 
 					end
 
 					7'b0110011: begin   // Tipo R
@@ -154,7 +153,7 @@ module Controle(
                         	        end
 
 					7'b0110111: begin // lui
-						nextState = lui;
+						nextState = lui1;
 					end
 				endcase
 			end
@@ -266,33 +265,7 @@ module Controle(
 				endcase
 				nextState = RESET;
 			end
-                             /*           
-			bneOP1: begin
-				Shift = 0;
-				SelMux2 = 1;
-			    	SelMux4 = 0;
-			       	SelMuxMem = 0;
-				RegWrite = 0;
-			    	MemRead = 0;
-				MemData_Read = 0;
-			    	LoadIR = 0;
-			    	loadRegA = 0;
-			    	loadRegB = 0;
-				loadRegAluOut = 0;
-				loadRegMemData = 0;
-			    	AluOperation = SUB;                   
-                                if (AluZero == 0) begin
-                                        PCwrite = 1;
-					SelMuxPC = 1; 
-					PCWriteCond = 0;
-                                end
-                                if (AluZero == 1) begin
-                                        PCwrite = 0;
-                                        PCWriteCond = 0;
-				end
-				nextState = RESET;
-			end
-			*/
+          
 			bneOP1: begin
 				Shift = 0;
 				SelMux2 = 1;
@@ -384,21 +357,41 @@ module Controle(
 			memDRead2: begin
 				Shift = 0;
 				SelMuxPC = 0;
-				SelMux2 = 0;
-			    	SelMux4 = 0;
-			       	SelMuxMem = 1;
+				//SelMux2 = 0;
+			    	//SelMux4 = 0;
+			       	SelMuxMem = 0;
 			    	PCwrite = 0;
 				PCWriteCond = 0;
 				RegWrite = 0;
 			    	MemRead = 0;
-				MemData_Read = 1;
+				MemData_Read = 0;
 			    	LoadIR = 0;
 			    	//loadRegA = 0;
 			    	//loadRegB = 0;
 				loadRegAluOut = 0;
 				loadRegMemData = 1;
-			    	AluOperation = 0;
+			    	//AluOperation = 0;
 				nextState = loadWrite;
+			end
+
+			loadWrite: begin
+				Shift = 0;
+				SelMuxPC = 0;
+				//SelMux2 = 0;
+			    	//SelMux4 = 0;
+			       	SelMuxMem = 1;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
+				RegWrite = 1;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
+			    	//AluOperation = 0;
+				nextState = RESET;
 			end
 
 			memDWrite1: begin
@@ -440,16 +433,16 @@ module Controle(
 				loadRegMemData = 0;
 				nextState = RESET;
 			end
-
-			loadWrite: begin
+			
+			lui1: begin
 				Shift = 0;
 				SelMuxPC = 0;
-				SelMux2 = 0;
-			    	SelMux4 = 0;
-			       	SelMuxMem = 1;
+				//SelMux2 = 0;
+			    	//SelMux4 = 2;
+			       	//SelMuxMem = 2;
 			    	PCwrite = 0;
 				PCWriteCond = 0;
-				RegWrite = 1;
+				//RegWrite = 1;
 			    	MemRead = 0;
 				MemData_Read = 0;
 			    	LoadIR = 0;
@@ -457,11 +450,11 @@ module Controle(
 			    	loadRegB = 0;
 				loadRegAluOut = 0;
 				loadRegMemData = 0;
-			    	AluOperation = 0;
-				nextState = RESET;
-			end
-			
-			lui: begin
+			    	//AluOperation = 0;
+				nextState = lui2;
+			end 
+
+			lui2: begin
 				Shift = 0;
 				SelMuxPC = 0;
 				SelMux2 = 0;
