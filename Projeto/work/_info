@@ -1,0 +1,429 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/17.0
+vbancoReg
+Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z1 !s110 1556478784
+!i10b 1
+!s100 64T=Q6d5@]ik;4LP:;MQz2
+IB<L<cDnaaK[N=j]@;CQAg1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+!s105 bancoReg_sv_unit
+S1
+Z3 dC:/Users/plc3/Desktop/Projeto
+Z4 w1556461755
+8C:/Users/plc3/Desktop/Projeto/bancoReg.sv
+FC:/Users/plc3/Desktop/Projeto/bancoReg.sv
+L0 1
+Z5 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z6 !s108 1556478784.000000
+!s107 C:/Users/plc3/Desktop/Projeto/bancoReg.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/bancoReg.sv|
+!i113 1
+Z7 o-work work -sv
+Z8 tCvgOpt 0
+nbanco@reg
+vControle
+R0
+R1
+!i10b 1
+!s100 VNf5fJEUR0`3<Z=n:=Ean2
+Il3Dk^gi5g3OnB]kJG:mP@3
+R2
+!s105 Controle_sv_unit
+S1
+R3
+w1556477966
+8C:/Users/plc3/Desktop/Projeto/Controle.sv
+FC:/Users/plc3/Desktop/Projeto/Controle.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/plc3/Desktop/Projeto/Controle.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/Controle.sv|
+!i113 1
+R7
+R8
+n@controle
+vDeslocamento
+R0
+R1
+!i10b 1
+!s100 Z11::aGc@_;0Yk=glAQ?z2
+I4iS6[Em=CC4JzPkH3JPWT0
+R2
+!s105 Deslocamento_sv_unit
+S1
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/Deslocamento.sv
+FC:/Users/plc3/Desktop/Projeto/Deslocamento.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/plc3/Desktop/Projeto/Deslocamento.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/Deslocamento.sv|
+!i113 1
+R7
+R8
+n@deslocamento
+Einstr_reg_risc_v
+R4
+Z9 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z10 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R3
+Z11 8C:/Users/plc3/Desktop/Projeto/Instr_Reg_RISC_V.vhd
+Z12 FC:/Users/plc3/Desktop/Projeto/Instr_Reg_RISC_V.vhd
+l0
+L49
+VB5`a<R]^i3@BR]JPPmelC3
+!s100 ZklCa4iZ@TNXUFBBiZChh3
+Z13 OV;C;10.5b;63
+32
+Z14 !s110 1556478785
+!i10b 1
+Z15 !s108 1556478785.000000
+Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/plc3/Desktop/Projeto/Instr_Reg_RISC_V.vhd|
+Z17 !s107 C:/Users/plc3/Desktop/Projeto/Instr_Reg_RISC_V.vhd|
+!i113 1
+Z18 o-work work -2002 -explicit
+Z19 tExplicit 1 CvgOpt 0
+Abehavioral_arch
+R9
+R10
+DEx4 work 16 instr_reg_risc_v 0 22 B5`a<R]^i3@BR]JPPmelC3
+l68
+L65
+Vo8SZoo^`iHF7`CU3CnhD`1
+!s100 e?bWG@:SnkVC476;`5UQ[1
+R13
+32
+R14
+!i10b 1
+R15
+R16
+R17
+!i113 1
+R18
+R19
+vMemoria32
+R0
+R14
+!i10b 1
+!s100 Q2gmKA>Pd1H;3=f[e^lb[3
+I1Zzmj<O<RhmUQ51Dn6^[K1
+R2
+!s105 Memoria32_sv_unit
+S1
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/Memoria32.sv
+FC:/Users/plc3/Desktop/Projeto/Memoria32.sv
+Z20 L0 26
+R5
+r1
+!s85 0
+31
+R15
+!s107 C:/Users/plc3/Desktop/Projeto/Memoria32.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/Memoria32.sv|
+!i113 1
+R7
+R8
+n@memoria32
+vMemoria64
+R0
+Z21 !s110 1556478783
+!i10b 1
+!s100 1fz3Mgbi`W1QjWk]9CgUO3
+ICX9]8F;iXX8CN;jKzLgXI1
+R2
+!s105 Memoria64_sv_unit
+S1
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/Memoria64.sv
+FC:/Users/plc3/Desktop/Projeto/Memoria64.sv
+R20
+R5
+r1
+!s85 0
+31
+Z22 !s108 1556478783.000000
+!s107 C:/Users/plc3/Desktop/Projeto/Memoria64.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/Memoria64.sv|
+!i113 1
+R7
+R8
+n@memoria64
+vmux_2in
+R0
+R21
+!i10b 1
+!s100 cI4m7dYQ]>Lb2<_a=GcZC2
+ILIfbc^L3l8Z;dgnPTX7WT1
+R2
+!s105 mux_2in_sv_unit
+S1
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/mux_2in.sv
+FC:/Users/plc3/Desktop/Projeto/mux_2in.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R22
+!s107 C:/Users/plc3/Desktop/Projeto/mux_2in.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/mux_2in.sv|
+!i113 1
+R7
+R8
+vmux_3in
+R0
+R21
+!i10b 1
+!s100 d:]aheHE^elcU0d<24?NU3
+IGWc3kFO3k;jdo]Hg8ol1k2
+R2
+!s105 mux3_in_sv_unit
+S1
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/mux3_in.sv
+FC:/Users/plc3/Desktop/Projeto/mux3_in.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R22
+!s107 C:/Users/plc3/Desktop/Projeto/mux3_in.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/mux3_in.sv|
+!i113 1
+R7
+R8
+vmux_4in
+R0
+R21
+!i10b 1
+!s100 0Q^hiQQj7kZAnP5R3K`;;2
+IUJPEozmCe19=01_Zm4Y3P0
+R2
+!s105 mux_4in_sv_unit
+S1
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/mux_4in.sv
+FC:/Users/plc3/Desktop/Projeto/mux_4in.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R22
+!s107 C:/Users/plc3/Desktop/Projeto/mux_4in.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/mux_4in.sv|
+!i113 1
+R7
+R8
+vramOnChip32
+R21
+!i10b 1
+!s100 ?cVfgbFYaCB@4255f4cUf3
+I1Eic2oD]iX7`@HFKRzSon2
+R2
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/ramOnChip32.v
+FC:/Users/plc3/Desktop/Projeto/ramOnChip32.v
+Z23 L0 40
+R5
+r1
+!s85 0
+31
+R22
+!s107 C:/Users/plc3/Desktop/Projeto/ramOnChip32.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/plc3/Desktop/Projeto/ramOnChip32.v|
+!i113 1
+Z24 o-work work
+R8
+nram@on@chip32
+vramOnChip64
+R21
+!i10b 1
+!s100 cocMaFKEzGMH4F3EWeV]X1
+I7>]S;0>GGQET6`TjHOE^j1
+R2
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/ramOnChip64.v
+FC:/Users/plc3/Desktop/Projeto/ramOnChip64.v
+R23
+R5
+r1
+!s85 0
+31
+R22
+!s107 C:/Users/plc3/Desktop/Projeto/ramOnChip64.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/plc3/Desktop/Projeto/ramOnChip64.v|
+!i113 1
+R24
+R8
+nram@on@chip64
+vregister
+R0
+R1
+!i10b 1
+!s100 bYE8;I>5ooJ_Za^;]7VNI0
+IB]PmMJdVZYBW?<^E]2>z]0
+R2
+!s105 register_sv_unit
+S1
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/register.sv
+FC:/Users/plc3/Desktop/Projeto/register.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R22
+!s107 C:/Users/plc3/Desktop/Projeto/register.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/register.sv|
+!i113 1
+R7
+R8
+vSignExtend
+R0
+R1
+!i10b 1
+!s100 5XKMo3oPL[cjbn?@5`0NR2
+I<Pe5iGgUnCCO<Ji?BcPD83
+R2
+!s105 SignExtend_sv_unit
+S1
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/SignExtend.sv
+FC:/Users/plc3/Desktop/Projeto/SignExtend.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/plc3/Desktop/Projeto/SignExtend.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/SignExtend.sv|
+!i113 1
+R7
+R8
+n@sign@extend
+vsimulacao32
+R0
+R1
+!i10b 1
+!s100 dX:3NJhOG^98OPJOh9Tlk0
+IJXCDS78iBP4TaG0dl7APV0
+R2
+!s105 simulacao32_sv_unit
+S1
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/simulacao32.sv
+FC:/Users/plc3/Desktop/Projeto/simulacao32.sv
+L0 3
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/plc3/Desktop/Projeto/simulacao32.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/simulacao32.sv|
+!i113 1
+R7
+R8
+Eula64
+R4
+Z25 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+R9
+R10
+R3
+Z26 8C:/Users/plc3/Desktop/Projeto/ula64.vhd
+Z27 FC:/Users/plc3/Desktop/Projeto/ula64.vhd
+l0
+L55
+Vh8o2dPm9b1=EQMJMfPghZ1
+!s100 T1SZ4lW`0`^P2jjFke>h@2
+R13
+32
+R1
+!i10b 1
+R6
+Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/plc3/Desktop/Projeto/ula64.vhd|
+Z29 !s107 C:/Users/plc3/Desktop/Projeto/ula64.vhd|
+!i113 1
+R18
+R19
+Abehavioral
+R25
+R9
+R10
+DEx4 work 5 ula64 0 22 h8o2dPm9b1=EQMJMfPghZ1
+l81
+L71
+VI^EZmCUhUmlGjFianCgP23
+!s100 ?`9nGLOjDUedegnVSE5YV0
+R13
+32
+R1
+!i10b 1
+R6
+R28
+R29
+!i113 1
+R18
+R19
+vUP
+R0
+R1
+!i10b 1
+!s100 _2L8J=WLdE2@HGH`oPIj_0
+IB0=Q1Iz8X76hS>>N2lV_S2
+R2
+!s105 UP_sv_unit
+S1
+R3
+R4
+8C:/Users/plc3/Desktop/Projeto/UP.sv
+FC:/Users/plc3/Desktop/Projeto/UP.sv
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/Users/plc3/Desktop/Projeto/UP.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto/UP.sv|
+!i113 1
+R7
+R8
+n@u@p
