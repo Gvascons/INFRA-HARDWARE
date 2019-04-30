@@ -834,7 +834,7 @@ module Controle(
 			    	loadRegB = 0;
 				loadRegAluOut = 0;
 				loadRegMemData = 0;
-			    	AluOperation = LOAD;
+			    	//AluOperation = SUB;
                                 case (AluMenor) 
 					1: begin
 						PCwrite = 1;
