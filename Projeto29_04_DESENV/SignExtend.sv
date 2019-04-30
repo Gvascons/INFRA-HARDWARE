@@ -8,7 +8,7 @@ module SignExtend (
 	assign aux[6:0] = entrada[6:0];
  
 	always_comb begin
-    		if(aux == 7'b0010011 ||aux == 7'b0000011 || aux == 7'b1100111) begin // tipo I(ADDI, LD, JALR)
+    		if(aux == 7'b0010011 ||aux == 7'b0000011) begin // tipo I(ADDI, LD, JALR)
     			immed[11:0] = entrada[31:20];
         		saida [11:0] = immed [11:0];
         		if(immed[11] == 1) begin
@@ -33,7 +33,36 @@ module SignExtend (
             		end
     		end
  
-        	if(aux==7'b1100011 || aux==7'b1100111) //Tipo SB(beq,bne)
+		if (aux == 7'b1100111) begin
+			if(entrada[14:12] == 3'b000 ) begin //jalr
+				immed[11:0] = entrada[31:20];
+        			saida [11:0] = immed [11:0];
+        			if(immed[11] == 1) begin
+            				saida [63:12] = 52'hfffffffffffff;
+            			end
+   
+        			else begin
+            				saida [63:12] = 52'h0000000000000;
+            			end
+     			end
+
+	        	if(entrada[14:12] == 3'b001 ) begin //bne
+        			immed[12]=entrada[31];
+        			immed[11]=entrada[7];
+        			immed[10:5]=entrada[30:25];
+        			immed[4:1]=entrada[11:8];
+        			immed[0]=0;
+        			if(immed[12] == 1) begin
+            				saida [63:12] = 52'hfffffffffffff;
+            			end
+        			else
+            			begin
+            				saida [63:12] = 52'h0000000000000;
+            			end
+        		end
+		end
+
+        	if(aux==7'b1100011) //Tipo SB(beq)
     		begin
         		immed[12]=entrada[31];
         		immed[11]=entrada[7];

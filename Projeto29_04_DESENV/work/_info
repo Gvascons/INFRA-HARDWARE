@@ -10,7 +10,7 @@ cModel Technology
 dC:/intelFPGA/17.0
 vbancoReg
 Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z1 !s110 1556591418
+Z1 !s110 1556593550
 !i10b 1
 !s100 64T=Q6d5@]ik;4LP:;MQz2
 IBkBBIZP:`cgN0Y[:SdLMW0
@@ -26,7 +26,7 @@ Z5 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z6 !s108 1556591418.000000
+Z6 !s108 1556593550.000000
 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/bancoReg.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/bancoReg.sv|
 !i113 1
@@ -35,15 +35,15 @@ Z8 tCvgOpt 0
 nbanco@reg
 vControle
 R0
-Z9 !s110 1556591416
+!s110 1556593548
 !i10b 1
-!s100 A1PG4:]aNZ4fAZdB_8=9N0
-I9K5?YKCoc3Cef@QmmVAD91
+!s100 dN0abG7ll@1MQgHj]CzEn3
+Iz=5nm9ZN]1L8eYZ2DC>ZH2
 R2
 !s105 Controle_sv_unit
 S1
 R3
-w1556590512
+w1556592101
 8C:/Users/plc3/Desktop/Projeto29_04_DESENV/Controle.sv
 FC:/Users/plc3/Desktop/Projeto29_04_DESENV/Controle.sv
 L0 1
@@ -51,7 +51,7 @@ R5
 r1
 !s85 0
 31
-Z10 !s108 1556591416.000000
+Z9 !s108 1556593548.000000
 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/Controle.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/Controle.sv|
 !i113 1
@@ -60,7 +60,7 @@ R8
 n@controle
 vDeslocamento
 R0
-R9
+Z10 !s110 1556593549
 !i10b 1
 !s100 Z11::aGc@_;0Yk=glAQ?z2
 I6=cP82a[VgOchPk2kjVRR1
@@ -76,7 +76,7 @@ R5
 r1
 !s85 0
 31
-R10
+R9
 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/Deslocamento.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/Deslocamento.sv|
 !i113 1
@@ -96,14 +96,14 @@ VB5`a<R]^i3@BR]JPPmelC3
 !s100 ZklCa4iZ@TNXUFBBiZChh3
 Z15 OV;C;10.5b;63
 32
-R9
-!i10b 1
 R10
-Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/Instr_Reg_RISC_V.vhd|
-Z17 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/Instr_Reg_RISC_V.vhd|
+!i10b 1
+Z16 !s108 1556593549.000000
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/Instr_Reg_RISC_V.vhd|
+Z18 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/Instr_Reg_RISC_V.vhd|
 !i113 1
-Z18 o-work work -2002 -explicit
-Z19 tExplicit 1 CvgOpt 0
+Z19 o-work work -2002 -explicit
+Z20 tExplicit 1 CvgOpt 0
 Abehavioral_arch
 R11
 R12
@@ -114,17 +114,17 @@ Vo8SZoo^`iHF7`CU3CnhD`1
 !s100 e?bWG@:SnkVC476;`5UQ[1
 R15
 32
-R9
-!i10b 1
 R10
+!i10b 1
 R16
 R17
-!i113 1
 R18
+!i113 1
 R19
+R20
 vMemoria32
 R0
-R9
+R10
 !i10b 1
 !s100 Q2gmKA>Pd1H;3=f[e^lb[3
 IL4lG]8eo>eC3c;9FM0N1l2
@@ -135,12 +135,12 @@ R3
 R4
 8C:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria32.sv
 FC:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria32.sv
-Z20 L0 26
+Z21 L0 26
 R5
 r1
 !s85 0
 31
-R10
+R16
 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria32.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria32.sv|
 !i113 1
@@ -149,7 +149,7 @@ R8
 n@memoria32
 vMemoria64
 R0
-Z21 !s110 1556591417
+R10
 !i10b 1
 !s100 1fz3Mgbi`W1QjWk]9CgUO3
 I__LH?BhzE1P8:7T:H`_4Y2
@@ -160,12 +160,12 @@ R3
 R4
 8C:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria64.sv
 FC:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria64.sv
-R20
+R21
 R5
 r1
 !s85 0
 31
-Z22 !s108 1556591417.000000
+R16
 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria64.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria64.sv|
 !i113 1
@@ -174,7 +174,7 @@ R8
 n@memoria64
 vmux8_in
 R0
-!s110 1556591419
+Z22 !s110 1556593551
 !i10b 1
 !s100 mT<R?RR5l;A[dl@i[[ABf0
 IBjb6?1fnR9`@a[`D]<BNN2
@@ -190,7 +190,7 @@ R5
 r1
 !s85 0
 31
-R6
+!s108 1556593551.000000
 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux8_in.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux8_in.sv|
 !i113 1
@@ -198,7 +198,7 @@ R7
 R8
 vmux_2in
 R0
-R21
+R10
 !i10b 1
 !s100 cI4m7dYQ]>Lb2<_a=GcZC2
 Ino2MU0_EmW7Kj^OBUDUZf1
@@ -214,7 +214,7 @@ R5
 r1
 !s85 0
 31
-R22
+R16
 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux_2in.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux_2in.sv|
 !i113 1
@@ -222,7 +222,7 @@ R7
 R8
 vmux_2inAlu
 R0
-R1
+R22
 !i10b 1
 !s100 Y>SeCn6II5kRdkWf;4_500
 I_A2<E`oR@moWhBd65G?<83
@@ -247,7 +247,7 @@ R8
 nmux_2in@alu
 vmux_3in
 R0
-R21
+R10
 !i10b 1
 !s100 d:]aheHE^elcU0d<24?NU3
 IIk[:L]MbaD]Yi5d0;g^1M1
@@ -263,7 +263,7 @@ R5
 r1
 !s85 0
 31
-R22
+R16
 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux3_in.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux3_in.sv|
 !i113 1
@@ -318,7 +318,7 @@ r1
 R7
 R8
 vramOnChip32
-R21
+R10
 !i10b 1
 !s100 ?cVfgbFYaCB@4255f4cUf3
 IjOV20J=9f_<7jCF[mn[PN3
@@ -332,7 +332,7 @@ R5
 r1
 !s85 0
 31
-R22
+R16
 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/ramOnChip32.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/ramOnChip32.v|
 !i113 1
@@ -340,7 +340,7 @@ Z25 o-work work
 R8
 nram@on@chip32
 vramOnChip64
-R21
+R1
 !i10b 1
 !s100 cocMaFKEzGMH4F3EWeV]X1
 IZ_^^Jm[f?O4Ndb`O7i]Q30
@@ -354,7 +354,7 @@ R5
 r1
 !s85 0
 31
-R22
+R16
 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/ramOnChip64.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/ramOnChip64.v|
 !i113 1
@@ -363,7 +363,7 @@ R8
 nram@on@chip64
 vregister
 R0
-R21
+R1
 !i10b 1
 !s100 bYE8;I>5ooJ_Za^;]7VNI0
 Ik^43Ge`EY`T5>BN0SY81e0
@@ -379,7 +379,7 @@ R5
 r1
 !s85 0
 31
-R22
+R6
 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/register.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/register.sv|
 !i113 1
@@ -389,13 +389,13 @@ vSignExtend
 R0
 R1
 !i10b 1
-!s100 i9SF:<iF<GPRjfT1P[R`42
-ID7lKd0PcOh@WS2D5V`3DH1
+!s100 kh]<O]1jeG8>Y>W9:^@jG0
+I@^dGn=I5PJ;zKAY2nfIGf2
 R2
 !s105 SignExtend_sv_unit
 S1
 R3
-w1556591395
+w1556593544
 8C:/Users/plc3/Desktop/Projeto29_04_DESENV/SignExtend.sv
 FC:/Users/plc3/Desktop/Projeto29_04_DESENV/SignExtend.sv
 L0 1
@@ -454,8 +454,8 @@ R6
 Z29 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/plc3/Desktop/Projeto29_04_DESENV/ula64.vhd|
 Z30 !s107 C:/Users/plc3/Desktop/Projeto29_04_DESENV/ula64.vhd|
 !i113 1
-R18
 R19
+R20
 Abehavioral
 R26
 R11
@@ -473,8 +473,8 @@ R6
 R29
 R30
 !i113 1
-R18
 R19
+R20
 vUP
 R0
 R1

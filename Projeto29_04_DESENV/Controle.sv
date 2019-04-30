@@ -397,7 +397,7 @@ module Controle(
 			       	//SelMuxMem = 0;
 			    	PCwrite = 0;
 				PCWriteCond = 0;
-				RegWrite = 0;
+				RegWrite = 1;
 			    	MemRead = 0;
 			    	LoadIR = 0;
 			    	loadRegA = 0;
@@ -406,7 +406,7 @@ module Controle(
 				loadRegMemData = 0;
 				MemData_Read = 0;
 			    	AluOperation = SUM;
-				nextState = jalrOP2;
+				nextState = jalrOP3;
 			end
 
 			jalrOP2: begin
