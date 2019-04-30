@@ -8,7 +8,7 @@ module SignExtend (
 	assign aux[6:0] = entrada[6:0];
  
 	always_comb begin
-    		if(aux == 7'b0010011 ||aux == 7'b0000011 || aux == 7'b1100111) begin // tipo I(ADDI, LD, JALR)
+    		if(aux == 7'b0010011 ||aux == 7'b0000011 || aux == 7'b1100111) begin // tipo I(ADDI, LD)
     			immed[11:0] = entrada[31:20];
         		saida [11:0] = immed [11:0];
         		if(immed[11] == 1) begin

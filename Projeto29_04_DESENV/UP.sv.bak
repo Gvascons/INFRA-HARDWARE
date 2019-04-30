@@ -156,7 +156,7 @@ module UP (
 		.f_2in(MuxA_Exit));
 
 
-	mux8_in MuxB (
+	mux_8in MuxB (
 		.SelMux8(SelMux8),
 		.MuxB_a(RegB_Exit),
 		.MuxB_b(64'd4),

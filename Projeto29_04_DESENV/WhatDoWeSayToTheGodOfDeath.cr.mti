@@ -33,12 +33,40 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	register
 
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/bancoReg.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/bancoReg.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module bancoReg
+
+Top level modules:
+	bancoReg
+
 } {} {}} D:/Users/jgav/Desktop/Projeto29_04/Memoria32.sv {1 {vlog -work work -sv -stats=none D:/Users/jgav/Desktop/Projeto29_04/Memoria32.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module Memoria32
 
 Top level modules:
 	Memoria32
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/simulacao32.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/simulacao32.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module simulacao32
+
+Top level modules:
+	simulacao32
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux3_in.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux3_in.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module mux_3in
+
+Top level modules:
+	mux_3in
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux_2inAlu.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux_2inAlu.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module mux_2inAlu
+
+Top level modules:
+	mux_2inAlu
 
 } {} {}} D:/Users/jgav/Desktop/Projeto29_04/bancoReg.sv {1 {vlog -work work -sv -stats=none D:/Users/jgav/Desktop/Projeto29_04/bancoReg.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -54,12 +82,35 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	SignExtend
 
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/ula64.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/ula64.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Compiling entity Ula64
+-- Compiling architecture behavioral of Ula64
+
 } {} {}} D:/Users/jgav/Desktop/Projeto29_04/mux_2in.sv {1 {vlog -work work -sv -stats=none D:/Users/jgav/Desktop/Projeto29_04/mux_2in.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module mux_2in
 
 Top level modules:
 	mux_2in
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/Controle.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/Controle.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Controle
+
+Top level modules:
+	Controle
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/Deslocamento.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/Deslocamento.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Deslocamento
+
+Top level modules:
+	Deslocamento
 
 } {} {}} D:/Users/jgav/Desktop/Projeto29_04/Instr_Reg_RISC_V.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Users/jgav/Desktop/Projeto29_04/Instr_Reg_RISC_V.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
@@ -68,6 +119,13 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Loading package std_logic_1164
 -- Compiling entity Instr_Reg_RISC_V
 -- Compiling architecture behavioral_arch of Instr_Reg_RISC_V
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria32.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria32.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Memoria32
+
+Top level modules:
+	Memoria32
 
 } {} {}} D:/Users/jgav/Desktop/Projeto29_04/Memoria64.sv {1 {vlog -work work -sv -stats=none D:/Users/jgav/Desktop/Projeto29_04/Memoria64.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -82,6 +140,20 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 
 Top level modules:
 	mux_4in
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux8_in.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux8_in.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module mux8_in
+
+Top level modules:
+	mux8_in
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/ramOnChip64.v {1 {vlog -work work -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/ramOnChip64.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ramOnChip64
+
+Top level modules:
+	ramOnChip64
 
 } {} {}} D:/Users/jgav/Desktop/Projeto29_04/ula64.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Users/jgav/Desktop/Projeto29_04/ula64.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
@@ -99,11 +171,54 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	Deslocamento
 
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux_2in.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/mux_2in.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module mux_2in
+
+Top level modules:
+	mux_2in
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/ramOnChip32.v {1 {vlog -work work -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/ramOnChip32.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ramOnChip32
+
+Top level modules:
+	ramOnChip32
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/Instr_Reg_RISC_V.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/Instr_Reg_RISC_V.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity Instr_Reg_RISC_V
+-- Compiling architecture behavioral_arch of Instr_Reg_RISC_V
+
 } {} {}} D:/Users/jgav/Desktop/Projeto29_04/ramOnChip64.v {1 {vlog -work work -stats=none D:/Users/jgav/Desktop/Projeto29_04/ramOnChip64.v
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module ramOnChip64
 
 Top level modules:
 	ramOnChip64
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria64.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/Memoria64.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Memoria64
+
+Top level modules:
+	Memoria64
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/UP.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/UP.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module UP
+
+Top level modules:
+	UP
+
+} {} {}} C:/Users/plc3/Desktop/Projeto29_04_DESENV/register.sv {1 {vlog -work work -sv -stats=none C:/Users/plc3/Desktop/Projeto29_04_DESENV/register.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module register
+
+Top level modules:
+	register
 
 } {} {}}
