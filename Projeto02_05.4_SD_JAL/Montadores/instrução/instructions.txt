@@ -1,0 +1,7 @@
+lb x2,0(x0)
+lh x3,0(x0)
+lw x4,0(x0)
+ld x5,0(x0)
+lbu x6,0(x0)
+lhu x7,0(x0)
+lwu x8,0(x0)
