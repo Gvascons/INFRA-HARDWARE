@@ -108,4 +108,4 @@ module Memoria64
     //7
     ramOnChip64 #(.ramSize(65536), .ramWide(8) ) memBlock7 (.clk(Clk), .data(inS7), .radd(addS7), .wadd(waddS7), .wren(Wr), .q(outS7) );  
     
-endmodule 
+endmodule

@@ -22,7 +22,8 @@ module Controle(
     	output logic loadRegMemData,
     	output logic MemData_Read,
     	output logic SelMuxPC,
-    	output logic [2:0]SelMuxB);
+    	output logic [2:0]SelMuxB,
+	output logic [2:0]LoadTYPE);
  	
     	parameter SUM = 3'b001; //1
     	parameter SUB = 3'b010; //2
@@ -76,6 +77,7 @@ module Controle(
 	parameter jalOP1 = 45;
 	parameter jalOP2 = 46;
 	parameter jalOP3 = 47;
+	parameter ldOP3 = 48;
  
     	reg [9:0]Estado;
     	reg [9:0]nextState;
@@ -93,6 +95,7 @@ module Controle(
 		case(Estado)
 			RESET: begin
 				Shift = 0;
+				//LoadTYPE = 0;
 				SelMuxPC = 0;
 				SelMuxA = 0;
     	        		SelMuxB = 0;
@@ -114,6 +117,7 @@ module Controle(
 
                 	FETCH: begin
 				Shift = 0;
+				LoadTYPE = 0;
 				SelMuxPC = 0;
 				SelMuxA = 0;
 			    	SelMuxB = 1;
@@ -274,7 +278,8 @@ module Controle(
 					end
 				endcase //case(INSTR[6:0])
 			end //DECODE
-//INICIO DO TIPO R
+
+			//INICIO DO TIPO R
 			sumOP: begin
 				Shift = 0;
 				SelMuxPC = 0;
@@ -391,10 +396,9 @@ module Controle(
 			    	//AluOperation = 0;
 				nextState = RESET;
 			end
-//FIM DO TIPO R
+			//FIM DO TIPO R
 
-//TIPO I
-
+			//TIPO I
 			addiOP1: begin
 				Shift = 0;
 				SelMuxPC = 0;
@@ -516,6 +520,7 @@ module Controle(
 			end
 
 			lbOP1: begin
+				LoadTYPE = 4;
 				Shift = 0;
 				SelMuxPC = 0;
 				AluOperation = SUM;
@@ -528,14 +533,15 @@ module Controle(
 			    	MemRead = 0;
 				MemData_Read = 0;
 			    	LoadIR = 0;
-			    	//loadRegA = 0;
-			    	//loadRegB = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
 				loadRegAluOut = 1;
 				loadRegMemData = 0;
 				nextState = ldOP2;
 			end
 
 			lhOP1: begin
+				LoadTYPE = 3;
 				Shift = 0;
 				SelMuxPC = 0;
 				AluOperation = SUM;
@@ -548,14 +554,15 @@ module Controle(
 			    	MemRead = 0;
 				MemData_Read = 0;
 			    	LoadIR = 0;
-			    	//loadRegA = 0;
-			    	//loadRegB = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
 				loadRegAluOut = 1;
 				loadRegMemData = 0;
 				nextState = ldOP2;
 			end
 
 			lwOP1: begin
+				LoadTYPE = 2;
 				Shift = 0;
 				SelMuxPC = 0;
 				AluOperation = SUM;
@@ -568,14 +575,15 @@ module Controle(
 			    	MemRead = 0;
 				MemData_Read = 0;
 			    	LoadIR = 0;
-			    	//loadRegA = 0;
-			    	//loadRegB = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
 				loadRegAluOut = 1;
 				loadRegMemData = 0;
 				nextState = ldOP2;
 			end
 
 			ldOP1: begin
+				LoadTYPE = 1;
 				Shift = 0;
 				SelMuxPC = 0;
 				AluOperation = SUM;
@@ -586,40 +594,39 @@ module Controle(
 				PCWriteCond = 0;
 				RegWrite = 0;
 			    	MemRead = 0;
-				MemData_Read = 0;
+				MemData_Read = 1;
 			    	LoadIR = 0;
-			    	//loadRegA = 0;
-			    	//loadRegB = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
 				loadRegAluOut = 1;
 				loadRegMemData = 0;
 				nextState = ldOP2;
 			end
-
 			ldOP2: begin
 				Shift = 0;
 				SelMuxPC = 0;
-				//SelMuxA = 0;
-			    	//SelMuxB = 0;
+				SelMuxA = 0;
+			    	SelMuxB = 0;
 			       	SelMuxMem = 0;
 			    	PCwrite = 0;
 				PCWriteCond = 0;
 				RegWrite = 0;
 			    	MemRead = 0;
-				MemData_Read = 0;
+				MemData_Read = 1;
 			    	LoadIR = 0;
-			    	//loadRegA = 0;
-			    	//loadRegB = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
 				loadRegAluOut = 0;
-				loadRegMemData = 1;
-			    	//AluOperation = 0;
+				loadRegMemData = 0;
+			    	AluOperation = 0;
 				nextState = loadWrite;
 			end
 
 			loadWrite: begin
 				Shift = 0;
 				SelMuxPC = 0;
-				//SelMuxA = 0;
-			    	//SelMuxB = 0;
+				SelMuxA = 0;
+			    	SelMuxB = 0;
 			       	SelMuxMem = 1;
 			    	PCwrite = 0;
 				PCWriteCond = 0;
@@ -631,7 +638,7 @@ module Controle(
 			    	loadRegB = 0;
 				loadRegAluOut = 0;
 				loadRegMemData = 0;
-			    	//AluOperation = 0;
+			    	AluOperation = 0;
 				nextState = RESET;
 			end
 
@@ -648,8 +655,8 @@ module Controle(
 			    	MemRead = 0;
 				MemData_Read = 0;
 			    	LoadIR = 0;
-			    	//loadRegA = 0;
-			    	//loadRegB = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
 				loadRegAluOut = 1;
 				loadRegMemData = 0;
 				nextState = ldOP2;
@@ -668,8 +675,8 @@ module Controle(
 			    	MemRead = 0;
 				MemData_Read = 0;
 			    	LoadIR = 0;
-			    	//loadRegA = 0;
-			    	//loadRegB = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
 				loadRegAluOut = 1;
 				loadRegMemData = 0;
 				nextState = ldOP2;
@@ -689,8 +696,8 @@ module Controle(
 			    	MemRead = 0;
 				MemData_Read = 0;
 			    	LoadIR = 0;
-			    	//loadRegA = 0;
-			    	//loadRegB = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
 				loadRegAluOut = 1;
 				loadRegMemData = 0;
 				nextState = ldOP2;
@@ -704,60 +711,18 @@ module Controle(
 			breakOP1: begin
 				break;
 			end
-			
-//FIM DO TIPO I
+			//FIM DO TIPO I
 
-//INICIO DO TIPO I(Shifts)
-
+			//INICIO DO TIPO I(Shifts)
 			srliOP1: begin //SHIFT RIGHT LOGICO
 				Shift = 2'b01;
 				SelMuxPC = 0;
 				//SelMuxA = 1;
 			    	//SelMuxB = 4;
-			       	SelMuxMem = 0;
+			       	SelMuxMem = 3;
 			    	PCwrite = 0;
 				PCWriteCond = 0;
 				RegWrite = 1;
-			    	MemRead = 0;
-				MemData_Read = 0;
-			    	LoadIR = 0;
-			    	loadRegA = 0;
-			    	loadRegB = 0;
-				loadRegAluOut = 0;
-				loadRegMemData = 0;
-			    	AluOperation = LOAD;
-				nextState = RESET;
-			end
-
-			sraiOP1: begin //SHIFT RIGHT ARITMETICO
-				Shift = 2'b10;
-				SelMuxPC = 0;
-				SelMuxA = 1;
-			    	SelMuxB = 4;
-			       	SelMuxMem = 0;
-			    	PCwrite = 0;
-				PCWriteCond = 0;
-				RegWrite = 0;
-			    	MemRead = 0;
-				MemData_Read = 0;
-			    	LoadIR = 0;
-			    	loadRegA = 0;
-			    	loadRegB = 0;
-				loadRegAluOut = 0;
-				loadRegMemData = 0;
-			    	AluOperation = LOAD;
-				nextState = RESET;
-			end
-
-			slliOP1: begin //SHIFT LEFT LOGICO
-				Shift = 2'b00;
-				SelMuxPC = 0;
-				SelMuxA = 1;
-			    	SelMuxB = 4;
-			       	SelMuxMem = 0;
-			    	PCwrite = 0;
-				PCWriteCond = 0;
-				RegWrite = 0;
 			    	MemRead = 0;
 				MemData_Read = 0;
 			    	LoadIR = 0;
@@ -769,11 +734,48 @@ module Controle(
 				nextState = RESET;
 			end
 
+			sraiOP1: begin //SHIFT RIGHT ARITMETICO
+				Shift = 2'b10;
+				SelMuxPC = 0;
+				//SelMuxA = 1;
+			    	//SelMuxB = 4;
+			       	SelMuxMem = 3;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
+				RegWrite = 1;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
+			    	AluOperation = 0;
+				nextState = RESET;
+			end
 
-//FIM DO TIPO I(Shifts)
+			slliOP1: begin //SHIFT LEFT LOGICO
+				Shift = 2'b00;
+				SelMuxPC = 0;
+				//SelMuxA = 1;
+			    	//SelMuxB = 4;
+			       	SelMuxMem = 3;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
+				RegWrite = 1;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	loadRegA = 0;
+			    	loadRegB = 0;
+				loadRegAluOut = 0;
+				loadRegMemData = 0;
+			    	AluOperation = 0;
+				nextState = RESET;
+			end
+			//FIM DO TIPO I(Shifts)
 
-//INICIO DO TIPO S
-			
+			//INICIO DO TIPO S
 			sdOP1: begin
 				Shift = 0;
 				SelMuxPC = 0;
@@ -815,23 +817,67 @@ module Controle(
 			end
 
 			swOP1: begin
-
-
+				Shift = 0;
+				SelMuxPC = 0;
+				AluOperation = SUM;
+				SelMuxA = 1;
+			    	SelMuxB = 2;
+			       	SelMuxMem = 1;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
+				RegWrite = 0;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	//loadRegA = 0;
+			    	//loadRegB = 0;
+				loadRegAluOut = 1;
+				loadRegMemData = 0;
+				nextState = sdOP2;
 			end
 
 			shOP1:begin
-
+				Shift = 0;
+				SelMuxPC = 0;
+				AluOperation = SUM;
+				SelMuxA = 1;
+			    	SelMuxB = 2;
+			       	SelMuxMem = 1;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
+				RegWrite = 0;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	//loadRegA = 0;
+			    	//loadRegB = 0;
+				loadRegAluOut = 1;
+				loadRegMemData = 0;
+				nextState = sdOP2;
 			end
 
 			sbOP1: begin
-
-
+				Shift = 0;
+				SelMuxPC = 0;
+				AluOperation = SUM;
+				SelMuxA = 1;
+			    	SelMuxB = 2;
+			       	SelMuxMem = 1;
+			    	PCwrite = 0;
+				PCWriteCond = 0;
+				RegWrite = 0;
+			    	MemRead = 0;
+				MemData_Read = 0;
+			    	LoadIR = 0;
+			    	//loadRegA = 0;
+			    	//loadRegB = 0;
+				loadRegAluOut = 1;
+				loadRegMemData = 0;
+				nextState = sdOP2;
 			end
+			//FIM DO TIPO S
 
-//FIM DO TIPO S
-
-//INICIO DO TIPO SB
-
+			//INICIO DO TIPO SB
 			beqOP1: begin
 				Shift = 0;
 				SelMuxA = 1;
@@ -943,10 +989,9 @@ module Controle(
 				endcase
 				nextState = RESET;
 			end
-			
-//FIM DO TIPO SB
-//INICIO DO TIPO U
+			//FIM DO TIPO SB
 
+			//INICIO DO TIPO U
 			luiOP1: begin
 				Shift = 0;
 				SelMuxPC = 0;
@@ -987,10 +1032,9 @@ module Controle(
 			    	AluOperation = 0;
 				nextState = RESET;
 			end
-//FIM DO TIPO U	
+			//FIM DO TIPO U	
 		
-//INICIO DO TIPO UJ	
-
+			//INICIO DO TIPO UJ
 			jalOP1: begin
 				Shift = 0;
 				SelMuxPC = 1;
